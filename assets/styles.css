@@ -1,0 +1,565 @@
+html, body {
+    height: 100%;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: antiquewhite;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+}
+
+/* =========================
+   EVENTS HOME PAGE
+========================= */
+
+*.events-homepage {
+    margin: 0;
+    padding: 0;
+  }
+
+body.events-homepage {
+    background-color: antiquewhite;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+.events-homepage header {
+    text-align: center;
+    padding: 1rem;
+    background-color: darkcyan;
+  }
+
+.events-homepage nav {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    background-color: azure;
+    padding: 1rem;
+  }
+
+.events-homepage nav ul {
+    display: flex;
+    flex: 3;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 1rem;
+  }
+
+.events-homepage nav ul li {
+    margin: 1rem;
+  }
+
+.events-homepage nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+  }
+
+.events-homepage nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.events-homepage nav form {
+    flex: 1;
+    padding: 2rem;
+    align-content: center;
+  }
+
+.events-homepage #search-text {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-bottom: -0.5rem;
+}
+
+.events-homepage #all-events {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+.events-homepage #all-events article {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 0;
+    text-align: center;
+    min-height: 600px;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+.events-homepage #all-events article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+
+.events-homepage .short-desc,
+.events-homepage #all-events article time,
+.events-homepage #all-events article h3 {
+    padding: 0.5rem;
+    font-size: 18px;
+  }
+
+
+.events-homepage .category,
+.events-homepage .view-details,
+.events-homepage time {
+    font-weight: bold;
+  }
+
+.events-homepage .category {
+    background-color: cornsilk;
+    width: 100px;
+
+    border: 1px solid black;
+    margin: 0.5rem auto;
+    align-content: center;
+    padding: 0.5rem;
+  }
+
+.events-homepage .view-details {
+    background-color: lightgrey;
+    width: 100px;
+    border: 1px solid black;
+    padding: 1rem;
+    margin: 1rem auto;
+    margin-top: auto;
+  }
+
+.events-homepage .view-details:hover {
+    color: navy;
+    border: 1px solid darkblue;
+    text-decoration: underline;
+  }
+
+.events-homepage img {
+    width: 100%;
+    height: 180px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+.events-homepage footer {
+    background-color: lightblue;
+    padding: 1.5rem;
+  }
+
+.events-homepage #top-row-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.events-homepage footer p {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+.events-homepage #uni-address {
+    text-align: left;
+  }
+
+.events-homepage #contact-info {
+    text-align: right;
+  }
+
+.events-homepage #all-events a {
+    color: black;
+    text-decoration: none;
+  }
+
+.events-homepage #search-error {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+  @media screen and (max-width: 768px) {
+    .events-homepage nav ul {
+      flex-direction: column;
+    }
+
+    .events-homepage form {
+      align-content: center;
+    }
+
+    .events-homepage #all-events article {
+        min-height: 700px;
+    }
+
+    .events-homepage #top-row-container {
+      flex-direction: column;
+    }
+
+    .events-homepage #contact-info {
+      text-align: left;
+      margin-top: 2rem;
+    }
+  }
+
+
+/* =========================
+   EVENTS DETAILS PAGE
+========================= */
+
+*.events-details-page {
+    margin: 0;
+    padding: 0;
+}
+
+body.events-details-page {
+    background-color: antiquewhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.8;
+    border: 1px solid black;
+
+    min-height: 100vh;
+}
+
+.events-details-page header nav {
+    display: flex;
+    text-align: center;
+    background-color: azure;
+    padding: 1rem;
+}
+
+.events-details-page nav ul {
+    display: flex;
+    flex: 3;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 1rem;
+}
+
+.events-details-page nav ul li {
+    margin: 1rem;
+}
+
+.events-details-page nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.events-details-page nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.events-details-page img {
+    width: 100%;
+    height: 500px;
+}
+
+.events-details-page .event-content-wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+}
+
+.events-details-page .event-description {
+    flex: 70%;
+    padding: 3rem;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.events-details-page .event-description ul {
+    padding-left: 1.2rem;
+}
+
+.events-details-page .event-description h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.events-details-page .event-description h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.events-details-page .event-description h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.events-details-page .event-description p,
+.events-details-page .event-description ul {
+    margin-bottom: 1rem;
+}
+
+.events-details-page .event-aside {
+    flex: 30%;
+    padding: 2rem;
+    padding-top: 3rem;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.events-details-page .event-aside hr {
+    margin: 30px 0;
+}
+
+
+.events-details-page .event-aside p, 
+.events-details-page .event-aside h4 {
+    margin-bottom: 1rem;
+}
+
+.events-details-page .event-aside h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.events-details-page #register-button {
+    display: block;
+    margin: 60px auto;
+    padding: 15px 40px;
+    font-size: large;
+}
+
+.events-details-page #register-button:hover {
+    color: navy;
+    border: 1px solid darkblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.events-details-page footer {
+    background-color: lightblue;
+    padding: 1.5rem;
+}
+
+.events-details-page #top-row-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.events-details-page footer p {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.events-details-page #uni-address {
+    text-align: left;
+}
+
+.events-details-page #contact-info {
+    text-align: right;
+}
+
+
+@media (max-width: 900px) {
+
+    .events-details-page .event-content-wrapper {
+        flex-direction: column;
+        padding: 20px;
+        gap: 4rem;
+    }
+
+    .events-details-page .event-description,
+    .events-details-page .event-aside {
+        flex: 100%;
+        padding: 1.5rem;
+    }
+
+    .events-details-page img {
+        height: 250px;
+    }
+
+    .events-details-page nav ul {
+        flex-direction: column;
+    }
+
+    .events-details-page #top-row-container {
+        flex-direction: column;
+    }
+
+    .events-details-page #contact-info {
+        text-align: left;
+        margin-top: 2rem;
+    }
+}
+
+
+/* =========================
+   ADMIN EVENTS HOME PAGE
+   STYLING FOR BUTTONS
+========================= */
+
+.home-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding: 1rem;
+}
+
+.home-admin-buttons {
+    padding: 0.75rem;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#delete-btn {
+    color: red;
+}
+
+#update-btn {
+    color: blue;
+}
+
+#create-btn {
+  max-height: 100px;
+  max-width: 275px;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 30px;
+  cursor: pointer;
+
+  margin-top: 2rem;
+}
+
+
+/* =========================
+   ADMIN EVENTS DETAILS PAGE
+   STYLING FOR BUTTONS
+========================= */
+
+
+.details-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    width: 100%;
+}
+
+.details-admin-buttons {
+    padding: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 30px;
+    margin-bottom: 2rem;
+}
+
+#delete-btn {
+    color: red;
+}
+
+#update-btn {
+    color: blue;
+}
+
+
+/* =========================
+   ADMIN EVENTS ALL FORM
+   PAGES STYLING
+========================= */
+
+.form-label-row {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    align-items: start;
+    gap: 1rem;
+}
+
+.dropbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.submit-btn {
+    display: block;
+    margin: 3rem auto;
+    padding: 1rem;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+input, textarea, select {
+    padding: 0.5rem;
+}
+
+#category-header {
+    text-align: center;
+    margin: 2rem;
+}
+
+#category-form {
+    margin: 4rem;
+    align-content: center;
+}
+
+#category-submit-btn {
+    display: block;
+    margin: 8rem auto;
+    padding: 1rem;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.search-container {
+    display: flex;
+    gap: 15px;
+}
+
+.search-btn {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+/* delete form styling */
+
+#delete-content {
+    margin: 2rem;
+    margin-top: 6rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.delete-btn-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10rem auto;
+}
+
+.delete-form-btns {
+    padding: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.delete-form-btns:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#form-delete-btn {
+    color: red;
+}
+
+#cancel-btn, #form-view-details-btn {
+    color: blue;
+}
