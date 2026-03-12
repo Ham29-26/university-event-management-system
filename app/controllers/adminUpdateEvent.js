@@ -1,10 +1,11 @@
 import { getCategories, getCategoriesById } from "../models/categories.js";
 import { getContactsByEventId, updateContact, addContact, deleteContact } from "../models/contacts.js";
-import { getEventById, updateEvent } from "../models/events.js";
+import { getEventByEventId, updateEvent } from "../models/events.js";
 import render from "../tools/render.js";
 import { adminUpdateEventView } from "../views/adminUpdateEvent.js";
 import { redirect } from "../tools/redirect.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
+import { deleteImage, saveImage } from "../tools/imageHelpers.js";
 
 
 export function adminUpdateEventController({ request }) {
@@ -15,7 +16,7 @@ export function adminUpdateEventController({ request }) {
     const eventId = pathname.split("/")[5];
     const categoryId = pathname.split("/")[4];
     
-    const events = getEventById(eventId);
+    const events = getEventByEventId(eventId);
     const categories = getCategories();
     const eventCategory = getCategoriesById(categoryId);
     const contacts = getContactsByEventId(eventId);
@@ -45,13 +46,32 @@ export async function addUpdateEventController({ request }) {
 
     const formData = await request.formData();
 
+    // adding new image file if given and removing the old image
+    // or else keeping the old image
+    const imageFile = formData.get("image");
+
+    const event = getEventByEventId(eventId);
+
+    const eventName = event.event_name;
+
+    let finalImageLink;
+
+    if (imageFile.size > 0) {
+        deleteImage(event.event_image_link);
+        finalImageLink = await saveImage(imageFile, eventName);
+
+    } else {
+        finalImageLink = event.event_image_link;
+    }
+
+
     //updating the event with the given data
     updateEvent(
             formData.get("category-id").trim(),
             formData.get("event-name").trim(),
             formData.get("event-date").trim(),
             formData.get("event-short-desc").trim(),
-            formData.get("image-link").trim(),
+            finalImageLink,
     
             formData.get("event-long-desc").trim(),
             formData.get("section1-title").trim(),

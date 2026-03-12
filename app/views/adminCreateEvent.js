@@ -24,7 +24,7 @@ export function adminCreateEventView(data) {
           <h1>Create Event</h1>
           <h2>Event Card Details</h2><br>
 
-          <form method="POST">
+          <form method="POST" enctype="multipart/form-data">
           <div class="form-label-row">
                 <label for="event-category">Event Category: </label>
                 <div class="dropbox-wrapper">
@@ -59,8 +59,8 @@ export function adminCreateEventView(data) {
             <br>
 
             <div class="form-label-row">
-              <label for="image-link">Event Image Link: </label>
-              <input type="text" id="image-link" name="image-link"> 
+              <label for="image">Upload Event Image: </label>
+              <input type="file" id="image-link" name="image" accept="image/*"> 
             </div>
 
             <br><br>

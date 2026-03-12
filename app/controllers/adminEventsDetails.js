@@ -1,5 +1,5 @@
 import { getContactsByEventId } from "../models/contacts.js";
-import { getEventById } from "../models/events.js";
+import { getEventByEventId } from "../models/events.js";
 import render from "../tools/render.js";
 import { adminEventsDetailsView } from "../views/adminEventsDetails.js";
 
@@ -10,7 +10,7 @@ export function adminEventsDetailsController({ request }) {
 
     const eventId = pathname.split("/")[4];
 
-    const events = getEventById(eventId);
+    const events = getEventByEventId(eventId);
     const contacts = getContactsByEventId(eventId);
 
     // assume contacts returns an array of all the info on each contact

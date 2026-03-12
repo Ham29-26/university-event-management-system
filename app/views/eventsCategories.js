@@ -4,10 +4,17 @@ import { formatDate, formatURL } from "../../assets/script.js";
 export function eventsCategoriesView(data) {
     
     const categoriesNav = data.categories.map(category => `
-        <li><a href="/events/category=${escape(category.category_name).toLowerCase()}/${category.category_id}">${escape(category.category_name)}</a></li>
+        <li><a href="/events/category=${formatURL(escape(category.category_name))}/${category.category_id}">${escape(category.category_name)}</a></li>
         `).join("");
-        
-      const eventsHtml = data.events.map(event => 
+
+
+    let eventsHtml;
+
+    // checking if there are any events for the selected category
+    if (data.events.length == 0) {
+      eventsHtml = `<p id="category-error">There are currently no events available for the category <strong>"${escape(data.selectedCategory.category_name)}"</strong></p>`
+    } else {
+      eventsHtml = data.events.map(event => 
         `
         <a href="/events/events-details/${event.event_id}/${formatURL(escape(event.event_name))}">
             <article class="${escape(event.category_name).toLowerCase()}">
@@ -22,9 +29,11 @@ export function eventsCategoriesView(data) {
             </article>
             </a>
         `).join("");
-    
+    }
+
       
       return`
+       <div class="page-wrapper">
         <header>
           <h1>Events at Imaginary University</h1>
           <br>
@@ -51,5 +60,6 @@ export function eventsCategoriesView(data) {
             ${eventsHtml}
           </section>  
         </main>
+       </div> 
         `
 }

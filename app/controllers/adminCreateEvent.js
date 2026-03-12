@@ -5,6 +5,7 @@ import { adminCreateEventView } from "../views/adminCreateEvent.js"
 import { addEvent } from "../models/events.js";
 import { addContact } from "../models/contacts.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
+import { saveImage } from "../tools/imageHelpers.js";
 
 export function adminCreateEventController({ request }) {
     const categories = getCategories();
@@ -16,12 +17,20 @@ export function adminCreateEventController({ request }) {
 export async function addEventsController({ request }) {
     const formData = await request.formData();
 
+    // retrieving image file first
+    const imageFile = formData.get("image");
+
+    const eventName = formData.get("event-name").trim()
+
+    // saving image to the assets folder and retrieving image path
+    const imagePath = await saveImage(imageFile, eventName);
+
     const eventId = addEvent(
         formData.get("category-id").trim(),
         formData.get("event-name").trim(),
         formData.get("event-date").trim(),
         formData.get("event-short-desc").trim(),
-        formData.get("image-link").trim(),
+        imagePath,
 
         formData.get("event-long-desc").trim(),
         formData.get("section1-title").trim(),

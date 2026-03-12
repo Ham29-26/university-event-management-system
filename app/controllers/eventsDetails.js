@@ -1,6 +1,6 @@
 import { getCategories } from "../models/categories.js";
 import { getContactsByEventId } from "../models/contacts.js";
-import { getEventById } from "../models/events.js";
+import { getEventByEventId } from "../models/events.js";
 import render from "../tools/render.js";
 import { eventsDetailsView } from "../views/eventsDetails.js";
 
@@ -11,7 +11,7 @@ export function eventsDetailsController({ request }) {
 
     const eventId = pathname.split("/")[3];
 
-    const events = getEventById(eventId);
+    const events = getEventByEventId(eventId);
     const categories = getCategories();
     const contacts = getContactsByEventId(eventId);
 

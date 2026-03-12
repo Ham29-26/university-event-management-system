@@ -11,7 +11,7 @@ export function getEvents() {
     `).all();
 }
 
-export function getEventById(eventId) {
+export function getEventByEventId(eventId) {
     return db.prepare(`
         SELECT events.*,
         categories.category_name
@@ -22,7 +22,7 @@ export function getEventById(eventId) {
     `).get(eventId);
 }
 
-export function getCategoryById(categoryId) {
+export function getEventByCategoryId(categoryId) {
     return db.prepare(`
         SELECT events.*,
         categories.category_name

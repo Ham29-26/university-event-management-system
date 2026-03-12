@@ -85,6 +85,11 @@ body.events-homepage {
     margin-bottom: -0.5rem;
 }
 
+.events-homepage #category-error {
+    margin: 3rem;
+    font-size: 20px;
+}
+
 .events-homepage #all-events {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
@@ -495,6 +500,7 @@ body.events-details-page {
     padding: 1rem;
     font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 input, textarea, select {
@@ -517,6 +523,7 @@ input, textarea, select {
     padding: 1rem;
     font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 

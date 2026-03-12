@@ -47,7 +47,7 @@ export function adminUpdateEventView(data) {
           <h1>Update Event</h1>
           <h2>Event Card Details</h2><br>
 
-          <form method="POST">
+          <form method="POST" enctype="multipart/form-data">
           <div class="form-label-row">
             <label for="event-name">Event Name: </label>
             <input type="text" id="event-name" name="event-name" value="${escape(data.events.event_name)}">
@@ -78,11 +78,13 @@ export function adminUpdateEventView(data) {
               <textarea name="event-short-desc" rows="10" cols="30" placeholder="Enter a short description of your event here....">${escape(data.events.event_short_description)}</textarea>
             </div>
 
-            <br>
+            <br><br>
 
             <div class="form-label-row">
-              <label for="image-link">Event Image Link: </label>
-              <input type="text" id="image-link" name="image-link" value="${escape(data.events.event_image_link)}"> 
+              <p>Current Image:</p>
+              <img src=${data.events.event_image_link} alt="${data.events.event_name}" width="200" height="100">
+              <label for="image">Upload New Image: <strong>(optional)</strong> </label>
+              <input type="file" id="image-link" name="image" accept="image/*""> 
             </div>
 
             <br><br>

@@ -4,7 +4,7 @@ import { formatDate, formatLineBreaks, formatURL } from "../../assets/script.js"
 export function eventsHomeView(data) {
 
   const categoriesNav = data.categories.map(category => `
-    <li><a href="/events/category=${escape(category.category_name).toLowerCase()}/${category.category_id}">${escape(category.category_name)}</a></li>
+    <li><a href="/events/category=${formatURL(escape(category.category_name))}/${category.category_id}">${escape(category.category_name)}</a></li>
     `).join("");
     
   let searchText = data.searchItem ? `Search results for "${escape(data.searchItem).trim()}"` : ``;

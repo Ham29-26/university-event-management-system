@@ -1,4 +1,5 @@
-import { deleteEvent, getEventById } from "../models/events.js";
+import { deleteEvent, getEventByEventId } from "../models/events.js";
+import { deleteImage } from "../tools/imageHelpers.js";
 import { redirect } from "../tools/redirect.js";
 import render from "../tools/render.js";
 import { adminDeleteEventView } from "../views/adminDeleteEvent.js";
@@ -10,7 +11,7 @@ export function adminDeleteEventController({ request }) {
 
     const eventId = pathname.split("/")[4];
 
-    const event = getEventById(eventId);
+    const event = getEventByEventId(eventId);
 
     return render(adminDeleteEventView, { event }, request, "events-homepage");
 }
@@ -22,6 +23,14 @@ export function addDeleteEventController({ request }) {
 
     const eventId = pathname.split("/")[4];
 
+    // first deleting image from the assets folder before deleting it from the events table
+    const event = getEventByEventId(eventId);
+
+    const eventImageLink = event.event_image_link;
+
+    deleteImage(eventImageLink);
+
+    // deleting all information on the event from the database
     deleteEvent(eventId);
 
     return redirect("/events/admin/events-homepage");
