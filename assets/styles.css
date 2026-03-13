@@ -570,3 +570,45 @@ input, textarea, select {
 #cancel-btn, #form-view-details-btn {
     color: blue;
 }
+
+
+/* =========================
+   FLASH MESSAGE
+========================= */
+
+aside#flash {
+    background: orangered;
+    color: white;
+    position: fixed;
+    top: 5rem;
+    right: 0;
+    padding-inline: 2rem;
+    font-size: 1.2em;
+    translate: calc(100% - 1rem);
+    transition: translate 200ms;
+    animation: flash 3s;
+}
+
+aside#flash:hover {
+        translate: none;
+    }
+
+aside#flash.create {
+    background-color: green;
+}
+
+aside#flash.update {
+    background-color: blue;
+}
+
+aside#flash.delete {
+    background-color: orangered;
+}
+
+
+@keyframes flash {
+    10%,
+    90% {
+        translate: none;
+    }
+}

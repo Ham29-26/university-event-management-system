@@ -68,5 +68,11 @@ export async function addEventsController({ request }) {
         )
     }
 
-    return redirect("/events/admin/events-homepage");
+    const headers = new Headers();
+
+    return redirect(
+        headers, 
+        "/events/admin/events-homepage", 
+        `✅ Event "${eventName}" created successfully!`
+    );
 }

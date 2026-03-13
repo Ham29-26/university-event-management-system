@@ -154,5 +154,13 @@ export async function addUpdateEventController({ request }) {
     }
 
 
-    return redirect("/events/admin/events-homepage")
+    const updatedEventName = formData.get("event-name").trim();
+
+    const headers = new Headers();
+
+    return redirect(
+        headers, 
+        "/events/admin/events-homepage", 
+        `✏️ Event "${updatedEventName}" updated successfully!`
+    );
 }

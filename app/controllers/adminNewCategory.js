@@ -36,5 +36,12 @@ export async function addNewCategoryController({ request }) {
     }
 
     addCategory(firstLetterUpperCase(newCategory));
-    return redirect("/events/admin/event-creation-form");
+
+    const headers = new Headers();
+
+    return redirect(
+        headers, 
+        "/events/admin/event-creation-form", 
+        `✅ Category "${firstLetterUpperCase(newCategory)}" added successfully!`
+    );
 }

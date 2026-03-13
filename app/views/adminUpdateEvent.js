@@ -229,10 +229,6 @@ export function adminUpdateEventView(data) {
           </form>
 
         </article>
-
-        <aside class="event-aside">
-          <h3>Live preview if possible</h3>
-        </aside>
       </section>
     </main>
     `
