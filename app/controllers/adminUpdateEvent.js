@@ -1,4 +1,4 @@
-import { getCategories, getCategoriesById } from "../models/categories.js";
+import { getCategories } from "../models/categories.js";
 import { getContactsByEventId, updateContact, addContact, deleteContact } from "../models/contacts.js";
 import { getEventByEventId, updateEvent } from "../models/events.js";
 import render from "../tools/render.js";
@@ -6,6 +6,8 @@ import { adminUpdateEventView } from "../views/adminUpdateEvent.js";
 import { redirect } from "../tools/redirect.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
 import { deleteImage, saveImage } from "../tools/imageHelpers.js";
+import { validateSchema } from "../tools/validation.js";
+import { updateEventSchema } from "../schema/updateEventSchema.js";
 
 
 export function adminUpdateEventController({ request }) {
@@ -14,11 +16,10 @@ export function adminUpdateEventController({ request }) {
     const pathname = url.pathname;
     
     const eventId = pathname.split("/")[5];
-    const categoryId = pathname.split("/")[4];
+    const selectedCategoryId = pathname.split("/")[4];
     
     const events = getEventByEventId(eventId);
     const categories = getCategories();
-    const eventCategory = getCategoriesById(categoryId);
     const contacts = getContactsByEventId(eventId);
     
     // assume contacts returns an array of all the info on each contact
@@ -33,22 +34,58 @@ export function adminUpdateEventController({ request }) {
         contact2 = contacts[1]; // second contact (optional)
     }
 
-    return render(adminUpdateEventView, { events, categories, eventCategory, contact1, contact2}, request, "events-details-page");
+    return render(adminUpdateEventView, { events, categories, selectedCategoryId, contact1, contact2}, request, "events-details-page");
 }
 
 
 export async function addUpdateEventController({ request }) {
+
     const url = new URL(request.url);
-
     const pathname = url.pathname;
-
+    
     const eventId = pathname.split("/")[5];
+    const selectedCategoryId = pathname.split("/")[4];
 
+    // RE=FETCH EVERYTHING (same as GET controller)
+    const events = getEventByEventId(eventId);
+    const categories = getCategories();
+    const contacts = getContactsByEventId(eventId);
+    
+    let contact1 = null;
+    let contact2 = null;
+    
+    if (contacts.length >= 1) {
+        contact1 = contacts[0]; 
+    }
+    
+    if (contacts.length >= 2) {
+        contact2 = contacts[1]; 
+    }
+
+    // NOW validation
     const formData = await request.formData();
+
+    // first validating all input and proceeding ahead only if they are valid
+    // else will return a 400 status and present an error message
+    const { isValid, errors, validated } = validateSchema(formData, updateEventSchema);
+    
+    if (!isValid) {
+        return render(adminUpdateEventView, { 
+            events,
+            categories,
+            selectedCategoryId,
+            contact1,
+            contact2, 
+            formData: Object.fromEntries(formData),
+            errors 
+        }, request, "events-details-page", 400);
+    }
+
+    // continuing update logic below.....
 
     // adding new image file if given and removing the old image
     // or else keeping the old image
-    const imageFile = formData.get("image");
+    const imageFile = validated["event-image"];
 
     const event = getEventByEventId(eventId);
 
@@ -67,50 +104,37 @@ export async function addUpdateEventController({ request }) {
 
     //updating the event with the given data
     updateEvent(
-            formData.get("category-id").trim(),
-            formData.get("event-name").trim(),
-            formData.get("event-date").trim(),
-            formData.get("event-short-desc").trim(),
-            finalImageLink,
+        formData.get("category-id").trim(),
+        validated["event-name"],
+        validated["event-date"],
+        validated["event-short-desc"],
+        finalImageLink,
     
-            formData.get("event-long-desc").trim(),
-            formData.get("section1-title").trim(),
-            formData.get("section1-desc").trim(),
-            formData.get("section2-title").trim(),
-            formData.get("section2-desc").trim(),
-            formData.get("section3-title").trim(),
-            formData.get("section3-desc").trim(),
-            formData.get("registration-deadline").trim(),
+        validated["event-long-desc"],
+        formData.get("section1-title").trim(),
+        formData.get("section1-desc").trim(),
+        formData.get("section2-title").trim(),
+        formData.get("section2-desc").trim(),
+        formData.get("section3-title").trim(),
+        formData.get("section3-desc").trim(),
+        validated["registration-deadline"],
             
-            formData.get("event-start-time").trim(),
-            formData.get("event-end-time").trim(),
-            formData.get("event-location").trim(),
+        validated["event-start-time"],
+        formData.get("event-end-time").trim(),
+        validated["event-location"],
 
-            eventId
-        );
+        eventId
+    );
 
-    //retreiving contact info
-    const contacts = getContactsByEventId(eventId);
-    
-    // assume contacts returns an array of all the info on each contact
-    let contact1 = null;
-    let contact2 = null;
-    
-    if (contacts.length >= 1) {
-        contact1 = contacts[0]; // first contact
-    }
-    
-    if (contacts.length >= 2) {
-        contact2 = contacts[1]; // second contact (optional)
-    }
+    //using contact info retrieved in the beginning
 
     //updating the contact info for contact 1
     updateContact(
         contact1.contact_id,
-        formData.get("contact1-designation").trim(),
-        firstLetterUpperCase(formData.get("contact1-name")).trim(),
-        formData.get("contact1-email").trim(),
-        formData.get("contact1-phone").trim()
+        validated["contact1-designation"],
+        firstLetterUpperCase(validated["contact1-name"]),
+        validated["contact1-email"],
+        validated["contact1-phone"]
     )
 
     const contact2Designation = formData.get("contact2-designation").trim();
@@ -154,7 +178,7 @@ export async function addUpdateEventController({ request }) {
     }
 
 
-    const updatedEventName = formData.get("event-name").trim();
+    const updatedEventName = validated["event-name"];
 
     const headers = new Headers();
 

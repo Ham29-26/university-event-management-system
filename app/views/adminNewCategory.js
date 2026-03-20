@@ -1,6 +1,11 @@
-export function adminNewCategoryView(data) {
+import { fragments } from "./errors.js";
 
-  const errorMessage = data.message || "";
+export function adminNewCategoryView({ errors = {} }) {
+
+  // extracting the error messages
+  const f = fragments(errors);
+
+  const newCategory = f["new-category-name"] || {};
 
     return `
     <div class="page-wrapper">
@@ -20,12 +25,17 @@ export function adminNewCategoryView(data) {
           <form id="category-form" method="POST">
            <div class="form-label-row">
             <label for="new-category-name">Category Name: </label>
-            <input type="text" id="new-category-name" name="new-category-name">
+            <input type="text" id="new-category-name" name="new-category-name"${newCategory.value || ""}>
 
-            <br><p>${errorMessage}</p>
+            <br>${newCategory.message || ""}
            </div>
 
-            <br><button id="category-submit-btn" type="submit">Submit</button>
+            <br>
+
+            <div id="category-btn-row">
+              <a href="/events/admin/event-creation-form" id="category-back-btn" class="button">Back to form</a>
+              <button id="category-submit-btn" type="submit">Submit</button>
+            </div>
           </form>
     </main>
     </div>

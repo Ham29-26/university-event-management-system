@@ -485,7 +485,8 @@ body.events-details-page {
     display: grid;
     grid-template-columns: 250px 1fr;
     align-items: start;
-    gap: 1rem;
+    gap: 0.5rem 2rem;
+    margin-bottom: 2rem;
 }
 
 .dropbox-wrapper {
@@ -505,6 +506,37 @@ body.events-details-page {
 
 input, textarea, select {
     padding: 0.5rem;
+    width: 100%;
+    min-width: 200px;
+}
+
+select {
+    max-width: 100px;
+    max-height: 80px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+img#event-image {
+    margin-bottom: 3rem;
+}
+
+label[for="image"] {
+    margin-top: 0;
+}
+
+#category-btn-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 #category-header {
@@ -517,8 +549,19 @@ input, textarea, select {
     align-content: center;
 }
 
+#category-back-btn {
+    background-color: rgb(235, 227, 227);
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+    margin: 8rem auto;
+    padding: 1rem;
+    font-size: 25px;
+    font-weight: bold;
+}
+
 #category-submit-btn {
-    display: block;
+    background-color: rgb(235, 227, 227);
     margin: 8rem auto;
     padding: 1rem;
     font-size: 25px;

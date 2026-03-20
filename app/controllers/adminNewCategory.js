@@ -1,7 +1,9 @@
 import { firstLetterUpperCase } from "../../assets/script.js";
 import { addCategory, getCategories } from "../models/categories.js";
+import { newCategorySchema } from "../schema/newCategorySchema.js";
 import { redirect } from "../tools/redirect.js";
 import render from "../tools/render.js";
+import { validateSchema } from "../tools/validation.js";
 import { adminNewCategoryView } from "../views/adminNewCategory.js";
 
 export function adminNewCategoryController({ request }) {
@@ -14,26 +16,15 @@ export function adminNewCategoryController({ request }) {
 export async function addNewCategoryController({ request }) {
     const formData = await request.formData();
 
-    const categories = getCategories();
-    console.log(categories);
+    // first validating all input and proceeding ahead only if they are valid
+    // else will return a 400 status and present an error message
+    const { isValid, errors, validated } = validateSchema(formData, newCategorySchema);
     
-    const newCategory = formData.get("new-category-name").trim();
-
-    let message = "";
-
-    if (!newCategory) {
-            message = `Input is empty please enter a valid category name.`
-
-            return render(adminNewCategoryView, { categories, message }, request, "events-details-page")
-        }
-
-    for (const category of categories) {
-        if (category.category_name.toLowerCase() == newCategory.toLowerCase()) {
-            message = `The category ${newCategory} already exists please enter a different category.`
-
-            return render(adminNewCategoryView, { categories, message }, request, "events-details-page");
-        }
+    if (!isValid) {
+        return render(adminNewCategoryView, { errors }, request, "events-details-page", 400);
     }
+
+    const newCategory = validated["new-category-name"];
 
     addCategory(firstLetterUpperCase(newCategory));
 

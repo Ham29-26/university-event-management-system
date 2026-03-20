@@ -6,6 +6,8 @@ import { addEvent } from "../models/events.js";
 import { addContact } from "../models/contacts.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
 import { saveImage } from "../tools/imageHelpers.js";
+import { validateSchema } from "../tools/validation.js";
+import { eventSchema } from "../schema/eventSchema.js";
 
 export function adminCreateEventController({ request }) {
     const categories = getCategories();
@@ -15,35 +17,47 @@ export function adminCreateEventController({ request }) {
 
 
 export async function addEventsController({ request }) {
+
+    const categories = getCategories();
+
     const formData = await request.formData();
 
-    // retrieving image file first
-    const imageFile = formData.get("image");
+    // first validating all input and proceeding ahead only if they are valid
+    // else will return a 400 status and present an error message
+    const { isValid, errors, validated } = validateSchema(formData, eventSchema);
 
-    const eventName = formData.get("event-name").trim()
+    if (!isValid) {
+        return render(adminCreateEventView, { categories, errors }, request, "events-details-page", 400);
+    }
+
+
+    // retrieving image file first
+    const imageFile = formData.get("event-image");
+
+    const eventName = validated["event-name"];
 
     // saving image to the assets folder and retrieving image path
     const imagePath = await saveImage(imageFile, eventName);
 
     const eventId = addEvent(
         formData.get("category-id").trim(),
-        formData.get("event-name").trim(),
-        formData.get("event-date").trim(),
-        formData.get("event-short-desc").trim(),
+        validated["event-name"],
+        validated["event-date"],
+        validated["event-short-desc"],
         imagePath,
 
-        formData.get("event-long-desc").trim(),
+        validated["event-long-desc"],
         formData.get("section1-title").trim(),
         formData.get("section1-desc").trim(),
         formData.get("section2-title").trim(),
         formData.get("section2-desc").trim(),
         formData.get("section3-title").trim(),
         formData.get("section3-desc").trim(),
-        formData.get("registration-deadline").trim(),
+        validated["registration-deadline"],
         
-        formData.get("event-start-time").trim(),
+        validated["event-start-time"],
         formData.get("event-end-time").trim(),
-        formData.get("event-location").trim()
+        validated["event-location"]
     );
     
     
@@ -51,10 +65,10 @@ export async function addEventsController({ request }) {
     //adding contact 1 info
     addContact(
         eventId,
-        formData.get("contact1-designation").trim(),
-        firstLetterUpperCase(formData.get("contact1-name")).trim(),
-        formData.get("contact1-email").trim(),
-        formData.get("contact1-phone").trim()
+        validated["contact1-designation"],
+        firstLetterUpperCase(validated["contact1-name"]),
+        validated["contact1-email"],
+        validated["contact1-phone"]
     )
 
     //adding contact 2 info only if it is not null / not empty
