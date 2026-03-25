@@ -47,13 +47,12 @@ export function adminEventsDetailsView(data) {
   if (data.contact1) {
     contactHtml += `
     <p>
-      <strong>${escape(data.contact1.contact_designation)}</strong><br />
-      ${escape(data.contact1.contact_name)}<br />
-      📞 ${escape(data.contact1.contact_phone)}<br />
-      ✉
-       <a href="mailto:${escape(data.contact1.contact_email)}">
-       ${escape(data.contact1.contact_email)}
-       </a>
+      <strong>${escape(data.contact1.contact_designation)}</strong><br>
+      ${escape(data.contact1.contact_name)}<br>
+      📞 ${escape(data.contact1.contact_phone)}<br>
+      ✉ <a href="mailto:${escape(data.contact1.contact_email)}">
+           ${escape(data.contact1.contact_email)}
+         </a>
     </p>
     `;
   }
@@ -62,13 +61,16 @@ export function adminEventsDetailsView(data) {
   if (data.contact2) {
     contactHtml += `
     <p>
-      <strong>${escape(data.contact2.contact_designation)}</strong><br />
-      ${escape(data.contact2.contact_name)}<br />
-      📞 ${escape(data.contact2.contact_phone)}<br />
-      ✉
-       <a href="mailto:${escape(data.contact2.contact_email)}">
-       ${escape(data.contact2.contact_email)}
-       </a>
+      <strong>${escape(data.contact2.contact_designation)}</strong><br>
+      ${escape(data.contact2.contact_name)}<br>
+
+      ${escape(data.contact2.contact_phone) ? `📞 ${escape(data.contact2.contact_phone)}<br>` : ""}
+
+      ${escape(data.contact2.contact_email) ? `
+        ✉ <a href="mailto:${escape(data.contact2.contact_email)}">
+           ${escape(data.contact2.contact_email)}
+         </a>` : ""
+      }
     </p>
     `;
   }

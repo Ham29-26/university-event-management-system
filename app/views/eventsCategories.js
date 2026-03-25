@@ -12,7 +12,9 @@ export function eventsCategoriesView(data) {
 
     // checking if there are any events for the selected category
     if (data.events.length == 0) {
-      eventsHtml = `<p id="category-error">There are currently no events available for the category <strong>"${escape(data.selectedCategory.category_name)}"</strong></p>`
+      eventsHtml = `<p id="category-error">There are currently no events available for the category 
+      <strong>"${escape(data.selectedCategory.category_name)}"</strong></p>`
+      
     } else {
       eventsHtml = data.events.map(event => 
         `

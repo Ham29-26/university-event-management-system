@@ -4,7 +4,9 @@ import { redirect } from "../tools/redirect.js";
 import render from "../tools/render.js";
 import { adminDeleteEventView } from "../views/adminDeleteEvent.js";
 
-export function adminDeleteEventController({ request }) {
+export function adminDeleteEventController(ctx) {
+    const { request } = ctx;
+    
     const url = new URL(request.url)
 
     const pathname = url.pathname;
@@ -13,10 +15,12 @@ export function adminDeleteEventController({ request }) {
 
     const event = getEventByEventId(eventId);
 
-    return render(adminDeleteEventView, { event }, request, "events-homepage");
+    return render(adminDeleteEventView, { event }, ctx, "events-homepage");
 }
 
-export function addDeleteEventController({ request }) {
+export function addDeleteEventController(ctx) {
+    const { request, headers } = ctx;
+
     const url = new URL(request.url)
 
     const pathname = url.pathname;
@@ -32,8 +36,6 @@ export function addDeleteEventController({ request }) {
 
     // deleting all information on the event from the database
     deleteEvent(eventId);
-
-    const headers = new Headers();
 
     return redirect(
         headers, 

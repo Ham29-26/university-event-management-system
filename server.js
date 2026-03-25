@@ -8,68 +8,47 @@ import { addEventsController, adminCreateEventController } from "./app/controlle
 import { addUpdateEventController, adminUpdateEventController } from "./app/controllers/adminUpdateEvent.js";
 import { addNewCategoryController, adminNewCategoryController } from "./app/controllers/adminNewCategory.js";
 import { addDeleteEventController, adminDeleteEventController } from "./app/controllers/adminDeleteEvent.js";
+import EventsRouter from "./router.js";
+import { notFoundController } from "./app/controllers/notFound.js";
+import { withLogs } from "./app/middleware/logging.js";
+import { withHeaders } from "./app/middleware/headers.js";
+import { validate } from "./app/middleware/validate.js";
+import { eventSchema } from "./app/schema/eventSchema.js";
+import { newCategorySchema } from "./app/schema/newCategorySchema.js"
+import { updateEventSchema } from "./app/schema/updateEventSchema.js";
+
+const eventsApp = new EventsRouter();
+
+// running all global middleware functions
+eventsApp.use(withHeaders);
+eventsApp.use(withLogs);
+
+// student facing pages
+eventsApp.get("/assets/*", staticController);
+eventsApp.get("/", eventsHomeController);
+eventsApp.get("/events/events-details/*", eventsDetailsController);
+eventsApp.get("/events/category=:category/:categoryId", eventsCategoriesController);
+
+// admin facing pages
+eventsApp.get("/events/admin/events-homepage", adminEventsHomeController);
+eventsApp.get("/events/admin/events-details/*", adminEventsDetailsController);
+
+eventsApp.get("/events/admin/event-creation-form", adminCreateEventController);
+eventsApp.post("/events/admin/event-creation-form", adminCreateEventController, validate(eventSchema), addEventsController);
+
+eventsApp.get("/events/admin/event-update-form/*", adminUpdateEventController);
+eventsApp.post("/events/admin/event-update-form/*", adminUpdateEventController, validate(updateEventSchema), addUpdateEventController);
+
+eventsApp.get("/events/admin/add-new-category-form", adminNewCategoryController);
+eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController, validate(newCategorySchema), addNewCategoryController);
+
+eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController);
+eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController);
+
+eventsApp.get("*", notFoundController);
+eventsApp.post("*", notFoundController);
+
 
 export default function server(request) {
-
-    const url = new URL(request.url);
-    console.log(`\n${request.method} ${url.pathname} ${url.search}`);
-
-    if(url.pathname.startsWith("/assets")) {
-        return staticController({ request });
-    }
-
-    if(url.pathname == "/") {
-        return eventsHomeController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/events-details") && request.method == "GET") {
-        return eventsDetailsController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/category=") && request.method == "GET") {
-        return eventsCategoriesController({ request });
-    }
-
-    if(url.pathname == "/events/admin/events-homepage" && request.method == "GET") {
-        return adminEventsHomeController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/admin/events-details") && request.method == "GET") {
-        return adminEventsDetailsController({ request });
-    }
-
-    if(url.pathname == "/events/admin/event-creation-form" && request.method == "GET") {
-        return adminCreateEventController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/admin/event-creation-form") && request.method == "POST") {
-        return addEventsController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/admin/event-update-form") && request.method == "GET") {
-        return adminUpdateEventController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/admin/event-update-form") && request.method == "POST") {
-        return addUpdateEventController({ request });
-    }
-
-    if(url.pathname == "/events/admin/add-new-category-form" && request.method == "GET") {
-        return adminNewCategoryController({ request });
-    }
-
-    if(url.pathname == "/events/admin/add-new-category-form" && request.method == "POST") {
-        return addNewCategoryController({ request });
-    }
-
-    if(url.pathname.startsWith("/events/admin/event-deletion-confirmation") && request.method == "GET") {
-        return adminDeleteEventController({ request });
-    }
-    
-    if(url.pathname.startsWith("/events/admin/event-deletion-confirmation") && request.method == "POST") {
-        return addDeleteEventController({ request });
-    }
-
-
-    return new Response("Not Found", {status: 404});
+    return eventsApp.handle({ request });
 }

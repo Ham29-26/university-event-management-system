@@ -4,8 +4,9 @@ export function fragments(errors) {
     return Object.fromEntries(Object.keys(errors).map(key => {
         const {error, value, message} = errors[key] || {};
 
-        // need to verify the given value is not type of File then only use the escape function
-        const safeValue = typeof value == "string" ? escape(value) : "";
+        // need to verify the given value is not of type File then only use the escape function
+        const safeValue = 
+        typeof value == "string" ? escape(value) : "";
 
         return [key, {
             value: value ? `value="${safeValue}"` : "",

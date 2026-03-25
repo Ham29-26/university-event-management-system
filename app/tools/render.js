@@ -1,21 +1,16 @@
 import { escape } from "@std/html/entities";
 import { getFlash } from "./flash.js";
 
-export default function render(viewFn, data, request, bodyClass = "", status = 200) {
+export default function render(viewFn, data, ctx, bodyClass = "") {
+  const { request, headers, status = 200 } = ctx;
 
   const content = viewFn(data);
-  const headers = new Headers();
-
-  headers.set("content-type", "text/html");
 
   // retrieving flash messages if there are any
   const flash = getFlash(request.headers, headers);
 
   let className;
   const flashText = flash?.toLowerCase();
-
-  console.log("flashText:", flashText);
-  console.log("type:", typeof flashText);
 
   if (flashText?.includes("created") || flashText?.includes("added")) {
     className = "create";
@@ -31,6 +26,7 @@ export default function render(viewFn, data, request, bodyClass = "", status = 2
    </aside>`
    : '';
 
+  headers.set("content-type", "text/html");
   const html = `
     <!DOCTYPE html>
     <html lang="en">

@@ -6,11 +6,10 @@ import { adminUpdateEventView } from "../views/adminUpdateEvent.js";
 import { redirect } from "../tools/redirect.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
 import { deleteImage, saveImage } from "../tools/imageHelpers.js";
-import { validateSchema } from "../tools/validation.js";
-import { updateEventSchema } from "../schema/updateEventSchema.js";
 
 
-export function adminUpdateEventController({ request }) {
+export function adminUpdateEventController(ctx) {
+    const { request, formData, errors } = ctx;
      
     const url = new URL(request.url);
     const pathname = url.pathname;
@@ -34,21 +33,19 @@ export function adminUpdateEventController({ request }) {
         contact2 = contacts[1]; // second contact (optional)
     }
 
-    return render(adminUpdateEventView, { events, categories, selectedCategoryId, contact1, contact2}, request, "events-details-page");
+    return render(adminUpdateEventView, { events, categories, selectedCategoryId, contact1, contact2, formData, errors}, ctx, "events-details-page");
 }
 
 
-export async function addUpdateEventController({ request }) {
+export async function addUpdateEventController(ctx, next) {
+    const { request, headers, isValid, validated, formData } = ctx;
 
     const url = new URL(request.url);
     const pathname = url.pathname;
     
     const eventId = pathname.split("/")[5];
-    const selectedCategoryId = pathname.split("/")[4];
 
-    // RE=FETCH EVERYTHING (same as GET controller)
-    const events = getEventByEventId(eventId);
-    const categories = getCategories();
+    // Re-fetch contact1 and contact2 (same as in the GET controller)
     const contacts = getContactsByEventId(eventId);
     
     let contact1 = null;
@@ -63,23 +60,10 @@ export async function addUpdateEventController({ request }) {
     }
 
     // NOW validation
-    const formData = await request.formData();
 
     // first validating all input and proceeding ahead only if they are valid
     // else will return a 400 status and present an error message
-    const { isValid, errors, validated } = validateSchema(formData, updateEventSchema);
-    
-    if (!isValid) {
-        return render(adminUpdateEventView, { 
-            events,
-            categories,
-            selectedCategoryId,
-            contact1,
-            contact2, 
-            formData: Object.fromEntries(formData),
-            errors 
-        }, request, "events-details-page", 400);
-    }
+    if (!isValid) return next(ctx);
 
     // continuing update logic below.....
 
@@ -111,12 +95,12 @@ export async function addUpdateEventController({ request }) {
         finalImageLink,
     
         validated["event-long-desc"],
-        formData.get("section1-title").trim(),
-        formData.get("section1-desc").trim(),
-        formData.get("section2-title").trim(),
-        formData.get("section2-desc").trim(),
-        formData.get("section3-title").trim(),
-        formData.get("section3-desc").trim(),
+        validated["section1-title"],
+        validated["section1-desc"],
+        validated["section2-title"],
+        validated["section2-desc"],
+        validated["section3-title"],
+        validated["section3-desc"],
         validated["registration-deadline"],
             
         validated["event-start-time"],
@@ -131,46 +115,47 @@ export async function addUpdateEventController({ request }) {
     //updating the contact info for contact 1
     updateContact(
         contact1.contact_id,
-        validated["contact1-designation"],
         firstLetterUpperCase(validated["contact1-name"]),
+        validated["contact1-designation"],
         validated["contact1-email"],
         validated["contact1-phone"]
     )
 
-    const contact2Designation = formData.get("contact2-designation").trim();
-    const contact2Name = formData.get("contact2-name").trim();
-    const contact2Email = formData.get("contact2-email").trim();
-    const contact2Phone = formData.get("contact2-phone").trim();
+    // handling optional contact 2 info
+    const contact2Name = validated["contact2-name"];
+    const contact2Designation = validated["contact2-designation"];
+    const contact2Email = validated["contact2-email"];
+    const contact2Phone = validated["contact2-phone"];
 
     // if contact2 for this event exists in the database
     if (contact2) {
 
-        //checking if all contact2 inputs are empty, if so delete its data
-        if (contact2Designation == "" 
-        && contact2Name == "" 
+        //checking if all contact2 inputs are empty, if so delete its data, else update it accordingly
+        if (contact2Name == "" 
+        && contact2Designation == ""
         && contact2Email == ""
         && contact2Phone == "") {
             deleteContact(contact2.contact_id);
 
-        //if all inputs are not empty then update it accordingly
         } else {
             updateContact(
                 contact2.contact_id,
-                contact2Designation,
                 firstLetterUpperCase(contact2Name),
+                contact2Designation,
                 contact2Email,
                 contact2Phone
             )
         }
 
     // finally if contact2 for this event doesnt exist then add it to the database if the given input isn't empty 
-    // (only validating name as it should be sufficient)
+    // if Contact 2 name is provided, treat it as intent to add Contact 2 and store all provided details
+    // any missing optional fields are omitted in the view
     } else {
         if (contact2Name != "") {
             addContact(
                 eventId,
-                contact2Designation,
                 firstLetterUpperCase(contact2Name),
+                contact2Designation,
                 contact2Email,
                 contact2Phone
             )
@@ -179,8 +164,6 @@ export async function addUpdateEventController({ request }) {
 
 
     const updatedEventName = validated["event-name"];
-
-    const headers = new Headers();
 
     return redirect(
         headers, 

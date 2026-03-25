@@ -3,8 +3,9 @@ import { fragments } from "./errors.js";
 
 export function adminUpdateEventView(data) {
 
-  // collecting information on all fields and displaying user inputted fields in case of errors
-  const form = data.formData || {};
+  // Convert formData to a plain object with key-value pairs for convenience and easy access, 
+  // and defaulting to {} if formData is null so we can safely access fields.
+  const form = data.formData ? Object.fromEntries(data.formData) : {};
 
   // collecting information on mandatory fields
   const eventName = form["event-name"] ?? data.events.event_name ?? "";
@@ -17,6 +18,7 @@ export function adminUpdateEventView(data) {
   const registrationDeadline = form["registration-deadline"] ?? data.events.registration_deadline ?? "";
 
   const startTime = form["event-start-time"] ?? data.events.event_start_time ?? "";
+  const endTime = form["event-end-time"] ?? data.events.event_end_time ?? "";
   const eventLocation = form["event-location"] ?? data.events.event_location ?? "";
 
   const contact1Name = form["contact1-name"] ?? data.contact1.contact_name ?? "";
@@ -91,8 +93,6 @@ export function adminUpdateEventView(data) {
       ${escape(category.category_name)}
     </option>
     `).join("");
-
-    console.log("selected category id", selectedCategoryId);
     
 
     return `
@@ -277,7 +277,7 @@ export function adminUpdateEventView(data) {
             <div class="form-label-row">
               <label for="event-end-time"><strong>(Optional)</strong> Event End Time: </label>
               <input type="time" id="event-end-time" name="event-end-time" 
-              value="${escape(data.events.event_end_time || "")}">
+              value="${escape(endTime)}">
             </div>
 
             <br>
@@ -333,6 +333,9 @@ export function adminUpdateEventView(data) {
             </div>
 
             <h3>(Optional)</h3>
+            <small><strong>Fill all Contact 2 fields or leave all empty.</strong></small>
+
+            <br><br>
 
             <div class="form-label-row">
               <label for="contact2-name">Event Contact 2 Name: </label>
@@ -378,7 +381,11 @@ export function adminUpdateEventView(data) {
             <br>
 
             <p class="form-hint">
-                Upload a new image only if you want to replace the existing one.
+              Upload a new image only if you want to replace the existing one.
+            </p>
+
+            <p class="form-hint">
+              If you have already selected an image but made other changes, please re-upload it to keep it.
             </p>
             
             <br>

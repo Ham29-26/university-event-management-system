@@ -3,7 +3,8 @@ import { getEventByCategoryId } from "../models/events.js";
 import render from "../tools/render.js";
 import { eventsCategoriesView } from "../views/eventsCategories.js";
 
-export function eventsCategoriesController({ request }) {
+export function eventsCategoriesController(ctx) {
+    const { request } = ctx;
 
     const url = new URL(request.url);
     const pathname = url.pathname;
@@ -17,5 +18,5 @@ export function eventsCategoriesController({ request }) {
     const selectedCategory = getCategoriesById(categoryId);
     
 
-    return render(eventsCategoriesView, { events, categories, selectedCategory }, request, "events-homepage");
+    return render(eventsCategoriesView, { events, categories, selectedCategory }, ctx, "events-homepage");
 }

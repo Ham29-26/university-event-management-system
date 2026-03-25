@@ -29,7 +29,7 @@ export const eventSchema = {
     },
 
     "event-long-desc": {
-        validators: [required, minLength(200)],
+        validators: [required, minLength(150)],
         displayName: "Event long description"
     },
 

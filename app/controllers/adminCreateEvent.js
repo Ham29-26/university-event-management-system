@@ -6,30 +6,21 @@ import { addEvent } from "../models/events.js";
 import { addContact } from "../models/contacts.js";
 import { firstLetterUpperCase } from "../../assets/script.js";
 import { saveImage } from "../tools/imageHelpers.js";
-import { validateSchema } from "../tools/validation.js";
-import { eventSchema } from "../schema/eventSchema.js";
 
-export function adminCreateEventController({ request }) {
+export function adminCreateEventController(ctx) {
+    const { errors } = ctx;
+
     const categories = getCategories();
 
-    return render(adminCreateEventView, { categories }, request, "events-details-page");
+    return render(adminCreateEventView, { categories, errors }, ctx, "events-details-page");
 }
 
 
-export async function addEventsController({ request }) {
+export async function addEventsController(ctx, next) {
+    const { headers, isValid, validated, formData } = ctx;
 
-    const categories = getCategories();
-
-    const formData = await request.formData();
-
-    // first validating all input and proceeding ahead only if they are valid
-    // else will return a 400 status and present an error message
-    const { isValid, errors, validated } = validateSchema(formData, eventSchema);
-
-    if (!isValid) {
-        return render(adminCreateEventView, { categories, errors }, request, "events-details-page", 400);
-    }
-
+    // validating user provided input
+    if (!isValid) return next(ctx);
 
     // retrieving image file first
     const imageFile = formData.get("event-image");
@@ -39,6 +30,7 @@ export async function addEventsController({ request }) {
     // saving image to the assets folder and retrieving image path
     const imagePath = await saveImage(imageFile, eventName);
 
+    // adding the new event to the database
     const eventId = addEvent(
         formData.get("category-id").trim(),
         validated["event-name"],
@@ -47,12 +39,12 @@ export async function addEventsController({ request }) {
         imagePath,
 
         validated["event-long-desc"],
-        formData.get("section1-title").trim(),
-        formData.get("section1-desc").trim(),
-        formData.get("section2-title").trim(),
-        formData.get("section2-desc").trim(),
-        formData.get("section3-title").trim(),
-        formData.get("section3-desc").trim(),
+        validated["section1-title"],
+        validated["section1-desc"],
+        validated["section2-title"],
+        validated["section2-desc"],
+        validated["section3-title"],
+        validated["section3-desc"],
         validated["registration-deadline"],
         
         validated["event-start-time"],
@@ -62,27 +54,27 @@ export async function addEventsController({ request }) {
     
     
     
-    //adding contact 1 info
+    // adding contact 1 info
     addContact(
         eventId,
-        validated["contact1-designation"],
         firstLetterUpperCase(validated["contact1-name"]),
+        validated["contact1-designation"],
         validated["contact1-email"],
         validated["contact1-phone"]
     )
 
-    //adding contact 2 info only if it is not null / not empty
-    if (formData.get("contact2-name") != "") {
+    // if Contact 2 name is provided, treat it as intent to add Contact 2 and store all provided details
+    // any missing optional fields are omitted in the view
+    if (validated["contact2-name"] != "") {
         addContact(
             eventId,
-            formData.get("contact2-designation").trim(),
-            firstLetterUpperCase(formData.get("contact2-name")).trim(),
-            formData.get("contact2-email").trim(),
-            formData.get("contact2-phone").trim()
+            firstLetterUpperCase(validated["contact2-name"]),
+            validated["contact2-designation"],
+            validated["contact2-email"],
+            validated["contact2-phone"]
         )
     }
 
-    const headers = new Headers();
 
     return redirect(
         headers, 

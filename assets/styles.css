@@ -18,6 +18,11 @@ main {
     flex: 1;
 }
 
+.not-found {
+    margin: 3rem;
+    font-size: 30px;
+}
+
 /* =========================
    EVENTS HOME PAGE
 ========================= */

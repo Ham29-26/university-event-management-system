@@ -4,7 +4,8 @@ import { getEventByEventId } from "../models/events.js";
 import render from "../tools/render.js";
 import { eventsDetailsView } from "../views/eventsDetails.js";
 
-export function eventsDetailsController({ request }) {
+export function eventsDetailsController(ctx) {
+    const { request } = ctx;
 
     const url = new URL(request.url);
     const pathname = url.pathname;
@@ -27,5 +28,5 @@ export function eventsDetailsController({ request }) {
         contact2 = contacts[1]; // second contact (optional)
     }
 
-    return render(eventsDetailsView, { events, categories, contact1, contact2 }, request, "events-details-page");
+    return render(eventsDetailsView, { events, categories, contact1, contact2 }, ctx, "events-details-page");
 }

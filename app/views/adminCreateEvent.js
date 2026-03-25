@@ -278,6 +278,9 @@ export function adminCreateEventView({ categories, errors = {} }) {
             <br>
 
             <h3>(Optional)</h3>
+            <small><strong>Fill all Contact 2 fields or leave all empty.</strong></small>
+
+            <br><br>
 
             <div class="form-label-row">
               <label for="contact2-name">Event Contact 2 Name: </label>
@@ -324,6 +327,10 @@ export function adminCreateEventView({ categories, errors = {} }) {
 
             <p class="form-hint">
               Please upload an image for the event in any suitable image format (JPG, PNG, etc.).
+            </p>
+
+            <p class="form-hint">
+              If you have already selected an image but made other changes, please re-upload it to keep it.
             </p>
 
             <br>

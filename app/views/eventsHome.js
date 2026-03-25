@@ -11,6 +11,20 @@ export function eventsHomeView(data) {
 
   let eventsHtml;
 
+
+    if (data.events.length == 0) {
+    searchText = ``;
+
+    eventsHtml =
+    `
+    <div id="search-error">
+    <h2>Search result for "${escape(data.searchItem).trim()}" not found. Please try again.</h2>
+    </div>
+    `
+  }
+
+  
+
   if (data.events.length != 0) {
     eventsHtml =
     data.events.map(event => 
@@ -28,18 +42,6 @@ export function eventsHomeView(data) {
         </article>
         </a>
     `).join("");
-  }
-
-
-  if (data.events.length == 0) {
-    searchText = ``;
-
-    eventsHtml =
-    `
-    <div id="search-error">
-    <h2>Search result for "${escape(data.searchItem).trim()}" not found. Please try again.</h2>
-    </div>
-    `
   }
   
 
