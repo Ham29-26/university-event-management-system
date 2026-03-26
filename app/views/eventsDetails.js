@@ -82,21 +82,19 @@ export function eventsDetailsView(data) {
 
 
     return `
-     <header>
-      <nav>
-        <ul>
-          <li><a href="/">All Events</a></li>
-          ${categoriesNav}
-        </ul>
-      </nav>
-    </header>
+    <nav>
+      <ul>
+        <li><a href="/">All Events</a></li>
+        ${categoriesNav}
+      </ul>
+    </nav>
 
     <main>
       <section class="event-image">
         <img
           src="${escape(data.events.event_image_link)}"
           alt="Event-Image"
-        />
+        >
       </section>
 
       <section class="event-content-wrapper">

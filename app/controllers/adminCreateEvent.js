@@ -12,7 +12,7 @@ export function adminCreateEventController(ctx) {
 
     const categories = getCategories();
 
-    return render(adminCreateEventView, { categories, errors }, ctx, "events-details-page");
+    return render(adminCreateEventView, { categories, errors }, ctx, "admin-event-forms");
 }
 
 

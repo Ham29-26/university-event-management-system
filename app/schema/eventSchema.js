@@ -44,17 +44,17 @@ export const eventSchema = {
     },
 
     "event-location": {
-        validators: [required],
+        validators: [required, minLength(2)],
         displayName: "Event location"
     },
 
     "contact1-name": {
-        validators: [required],
+        validators: [required, minLength(2)],
         displayName: "Contact 1 name"
     },
 
     "contact1-designation": {
-        validators: [required],
+        validators: [required, minLength(2)],
         displayName: "Contact 1 designation"
     },
 

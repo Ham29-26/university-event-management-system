@@ -9,7 +9,7 @@ export function adminNewCategoryController(ctx) {
 
     const categories = getCategories();
 
-    return render(adminNewCategoryView, { categories, errors }, ctx, "events-details-page");
+    return render(adminNewCategoryView, { categories, errors }, ctx, "admin-event-forms");
 }
 
 export function addNewCategoryController(ctx, next) {

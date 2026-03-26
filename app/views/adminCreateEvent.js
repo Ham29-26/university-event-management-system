@@ -49,20 +49,17 @@ export function adminCreateEventView({ categories, errors = {} }) {
 
 
     return `
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/events/admin/events-homepage">Dashboard</a></li>
-          <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-          <li><a href="#">Log out</a></li>
-          <li><a href="/">Student Page</a></li>
-        </ul>
-      </nav>
-    </header>
+     <nav>
+       <ul>
+         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
+         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
+         <li><a href="#">Log out</a></li>
+         <li><a href="/">Student Page</a></li>
+       </ul>
+     </nav>
 
-    <main>
-      <section class="event-content-wrapper">
-        <article class="event-description">
+     <main>
+        <article class="event-forms">
           <h1>Create Event</h1>
           <h2>Event Card Details</h2><br>
 
@@ -80,7 +77,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
                 </div>
             </div>
 
-            <br>
 
             <div class="form-label-row">
               <label for="event-name">Event Name: </label>
@@ -109,9 +105,9 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br><br>
+            <br>
 
-            <h2>Events details page information</h2><br>
+            <h2>Events details page information</h2>
 
             <h3>(Required)</h3>
 
@@ -124,7 +120,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br>
 
             <h3>(Optional)</h3>
 
@@ -146,9 +141,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br>
-
-            <br>
 
             <h3>(Optional)</h3>
 
@@ -170,10 +162,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br>
-
-            <br>
-
             <h3>(Optional)</h3>
 
             <div class="form-label-row">
@@ -194,8 +182,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br>
-
             <h3>(Required)</h3>
 
             <div class="form-label-row">
@@ -207,7 +193,7 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br><br>
+            <br>
 
             <h2>Event Information & Contact Details</h2><br>
 
@@ -215,7 +201,7 @@ export function adminCreateEventView({ categories, errors = {} }) {
               <label for="event-start-time"><strong>(Required)</strong> Start Time: </label>
 
               <div class="input-group">
-                <input type="time" id="event-start-time" name="event-start-time"${startTime.value || ""}><br>
+                <input type="time" id="event-start-time" name="event-start-time"${startTime.value || ""}>
                 ${startTime.message || ""}
               </div>
             </div>
@@ -234,15 +220,13 @@ export function adminCreateEventView({ categories, errors = {} }) {
               </div>
             </div>
 
-            <br>
-
             <h3>(Required)</h3>
 
             <div class="form-label-row">
               <label for="contact1-name">Event Contact 1 Name: </label>
 
               <div class="input-group">
-                <input type="text" id="contact1-name" name="contact1-name"${contact1Name.value || ""}><br>
+                <input type="text" id="contact1-name" name="contact1-name"${contact1Name.value || ""}>
                 ${contact1Name.message || ""}
               </div>
             </div>
@@ -251,7 +235,7 @@ export function adminCreateEventView({ categories, errors = {} }) {
               <label for="contact1-designation">Event Contact 1 Designation: </label>
 
               <div class="input-group">
-                <input type="text" id="contact1-designation" name="contact1-designation"${contact1Designation.value || ""}><br>
+                <input type="text" id="contact1-designation" name="contact1-designation"${contact1Designation.value || ""}>
                 ${contact1Designation.message || ""}
               </div>
             </div>
@@ -261,7 +245,7 @@ export function adminCreateEventView({ categories, errors = {} }) {
 
               <div class="input-group">
                 <input type="tel" id="contact1-phone" name="contact1-phone" 
-                placeholder="Phone number should be in the format +971561234567"${contact1Phone.value || ""}><br>
+                placeholder="Phone number should be in the format +971561234567"${contact1Phone.value || ""}>
                 ${contact1Phone.message || ""}
               </div>
             </div>
@@ -274,8 +258,7 @@ export function adminCreateEventView({ categories, errors = {} }) {
                 ${contact1Email.message || ""}
               </div>
             </div>
-
-            <br>
+            
 
             <h3>(Optional)</h3>
             <small><strong>Fill all Contact 2 fields or leave all empty.</strong></small>
@@ -349,7 +332,6 @@ export function adminCreateEventView({ categories, errors = {} }) {
           </form>
 
         </article>
-      </section>
     </main>
     `
 }

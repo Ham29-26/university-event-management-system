@@ -96,20 +96,17 @@ export function adminUpdateEventView(data) {
     
 
     return `
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/events/admin/events-homepage">Dashboard</a></li>
-          <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-          <li><a href="#">Log out</a></li>
-          <li><a href="/">Student Page</a></li>
-        </ul>
-      </nav>
-    </header>
+    <nav>
+      <ul>
+        <li><a href="/events/admin/events-homepage">Dashboard</a></li>
+        <li><a href="/events/admin/event-creation-form">Create Event</a></li>
+        <li><a href="#">Log out</a></li>
+        <li><a href="/">Student Page</a></li>
+      </ul>
+    </nav>
 
     <main>
-      <section class="event-content-wrapper">
-        <article class="event-description">
+        <article class="event-forms">
           <h1>Update Event</h1>
           <h2>Event Card Details</h2><br>
 
@@ -124,8 +121,6 @@ export function adminUpdateEventView(data) {
                 </div>
             </div>
 
-          <br>
-
           <div class="form-label-row">
             <label for="event-name">Event Name: </label>
 
@@ -134,8 +129,6 @@ export function adminUpdateEventView(data) {
               ${eventNameError.message || ""}
             </div>
           </div>
-
-            <br>
 
             <div class="form-label-row">
               <label for="event-date">Event Date: </label>
@@ -146,7 +139,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
 
             <div class="form-label-row">
               <label for="event-short-desc">Short Description on the Event: </label>
@@ -157,9 +149,11 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br><br>
+            <br>
 
-            <h2>Events details page information</h2><br>
+            <h2>Events details page information</h2>
+
+            <br>
 
             <h3>(Required)</h3>
 
@@ -172,7 +166,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
 
             <h3>(Optional)</h3>
 
@@ -185,7 +178,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
             
-            <br>
 
             <div class="form-label-row">
               <label for="section1-desc">Event sub-heading 1 Content: </label>
@@ -196,9 +188,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
-
-            <br>
 
             <h3>(Optional)</h3>
 
@@ -210,8 +199,6 @@ export function adminUpdateEventView(data) {
                 ${section2TitleError.message || ""}
               </div>
             </div>
-            
-            <br>
 
             <div class="form-label-row">
               <label for="section2-desc">Event sub-heading 2 Content: </label>
@@ -222,9 +209,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
-
-            <br>
 
             <h3>(Optional)</h3>
 
@@ -237,7 +221,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
             
-            <br>
 
             <div class="form-label-row">
               <label for="section3-desc">Event sub-heading 3 Content: </label>
@@ -248,7 +231,6 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
 
             <h3>(Required)</h3>
 
@@ -263,13 +245,15 @@ export function adminUpdateEventView(data) {
 
             <br><br>
 
-            <h2>Event Information & Contact Details</h2><br>
+            <h2>Event Information & Contact Details</h2>
+            
+            <br>
 
             <div class="form-label-row">
               <label for="event-start-time"><strong>(Required)</strong> Start Time: </label>
 
               <div class="input-group">
-                <input type="time" id="event-start-time" name="event-start-time" value="${escape(startTime)}"><br>
+                <input type="time" id="event-start-time" name="event-start-time" value="${escape(startTime)}">
                 ${startTimeError.message || ""}
               </div>
             </div>
@@ -280,7 +264,6 @@ export function adminUpdateEventView(data) {
               value="${escape(endTime)}">
             </div>
 
-            <br>
 
             <div class="form-label-row">
               <label for="event-location">Event Location: </label>
@@ -291,15 +274,13 @@ export function adminUpdateEventView(data) {
               </div>
             </div>
 
-            <br>
-
             <h3>(Required)</h3>
 
             <div class="form-label-row">
               <label for="contact1-name">Event Contact 1 Name: </label>
 
               <div class="input-group">
-                <input type="text" id="contact1-name" name="contact1-name" value="${escape(contact1Name)}"><br>
+                <input type="text" id="contact1-name" name="contact1-name" value="${escape(contact1Name)}">
                 ${contact1NameError.message || ""}
               </div>
             </div>
@@ -308,7 +289,7 @@ export function adminUpdateEventView(data) {
               <label for="contact1-designation">Event Contact 1 Designation: </label>
 
               <div class="input-group">
-                <input type="text" id="contact1-designation" name="contact1-designation" value="${escape(contact1Designation)}"><br>
+                <input type="text" id="contact1-designation" name="contact1-designation" value="${escape(contact1Designation)}">
                 ${contact1DesignationError.message || ""}
               </div>
             </div>
@@ -318,7 +299,7 @@ export function adminUpdateEventView(data) {
 
               <div class="input-group">
                 <input type="tel" id="contact1-phone" name="contact1-phone" 
-                placeholder="Phone number should be in the format +971561234567" value="${escape(contact1Phone)}"><br>
+                placeholder="Phone number should be in the format +971561234567" value="${escape(contact1Phone)}">
                 ${contact1PhoneError.message || ""}
               </div>
             </div>
@@ -341,7 +322,7 @@ export function adminUpdateEventView(data) {
               <label for="contact2-name">Event Contact 2 Name: </label>
 
               <div class="input-group">
-                <input type="text" id="contact2-name" name="contact2-name" value="${escape(contact2Name)}"><br>
+                <input type="text" id="contact2-name" name="contact2-name" value="${escape(contact2Name)}">
                 ${contact2NameError.message || ""}
               </div>
             </div>
@@ -350,7 +331,7 @@ export function adminUpdateEventView(data) {
               <label for="contact2-designation">Event Contact 2 Designation: </label>
 
               <div class="input-group">
-                <input type="text" id="contact2-designation" name="contact2-designation" value="${escape(contact2Designation)}"><br>
+                <input type="text" id="contact2-designation" name="contact2-designation" value="${escape(contact2Designation)}">
                 ${contact2DesignationError.message || ""}
               </div>
             </div>
@@ -360,7 +341,7 @@ export function adminUpdateEventView(data) {
 
               <div class="input-group">
                 <input type="tel" id="contact2-phone" name="contact2-phone" 
-                placeholder="Phone number should be in the format +971561234567" value="${escape(contact2Phone)}"><br>
+                placeholder="Phone number should be in the format +971561234567" value="${escape(contact2Phone)}">
                 ${contact2PhoneError.message || ""}
               </div>
             </div>
@@ -392,7 +373,7 @@ export function adminUpdateEventView(data) {
 
             <div class="form-label-row">
               <p>Current Image:</p>
-              <img src=${data.events.event_image_link} alt="${escape(eventName)}" width="200" id="event-image">
+              <img src=${data.events.event_image_link} alt="${escape(eventName)}" id="current-img" width="200" id="event-image">
 
               <label for="image">Upload New Image: <strong>(optional)</strong> </label>
 
@@ -407,7 +388,6 @@ export function adminUpdateEventView(data) {
           </form>
 
         </article>
-      </section>
     </main>
     `
 }

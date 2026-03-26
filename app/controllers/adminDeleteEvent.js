@@ -15,7 +15,7 @@ export function adminDeleteEventController(ctx) {
 
     const event = getEventByEventId(eventId);
 
-    return render(adminDeleteEventView, { event }, ctx, "events-homepage");
+    return render(adminDeleteEventView, { event }, ctx, "admin-event-forms");
 }
 
 export function addDeleteEventController(ctx) {

@@ -1,99 +1,105 @@
-html, body {
-    height: 100%;
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+body {
+    background-color: antiquewhite;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .page-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: antiquewhite;
-}
-
-body {
-    margin: 0;
-    overflow-x: hidden;
 }
 
 main {
     flex: 1;
 }
 
-.not-found {
-    margin: 3rem;
-    font-size: 30px;
-}
-
-/* =========================
-   EVENTS HOME PAGE
-========================= */
-
-*.events-homepage {
-    margin: 0;
-    padding: 0;
-  }
-
-body.events-homepage {
-    background-color: antiquewhite;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.8;
-    min-height: 100vh;
-  }
-
-.events-homepage header {
+header {
     text-align: center;
     padding: 1rem;
     background-color: darkcyan;
-  }
+}
 
-.events-homepage nav {
+nav {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     background-color: azure;
     padding: 1rem;
-  }
+}
 
-.events-homepage nav ul {
+nav ul {
     display: flex;
     flex: 3;
     justify-content: space-evenly;
     list-style: none;
     padding: 1rem;
-  }
+}
 
-.events-homepage nav ul li {
+nav ul li {
     margin: 1rem;
-  }
+}
 
-.events-homepage nav ul li a {
+nav ul li a {
     color: black;
     text-decoration: none;
     font-weight: bold;
     font-size: large;
-  }
+}
 
-.events-homepage nav ul li a:hover {
+nav ul li a:hover {
     text-decoration: underline;
 }
 
-.events-homepage nav form {
+nav form {
     flex: 1;
     padding: 2rem;
     align-content: center;
-  }
+}
 
-.events-homepage #search-text {
-    font-weight: bold;
-    font-size: 20px;
+footer {
+    background-color: lightblue;
+    padding: 1.5rem;
+}
+
+#top-row-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer p {
+    text-align: center;
     margin-top: 2rem;
-    margin-left: 2rem;
-    margin-bottom: -0.5rem;
 }
 
-.events-homepage #category-error {
-    margin: 3rem;
-    font-size: 20px;
+#uni-address {
+    text-align: left;
 }
+
+#contact-info {
+    text-align: right;
+}
+
+.search-container {
+    display: flex;
+    gap: 15px;
+}
+
+.search-btn {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+
+/* =========================
+   EVENTS HOME PAGE
+========================= */
 
 .events-homepage #all-events {
     display: grid;
@@ -101,7 +107,21 @@ body.events-homepage {
     justify-content: center;
     gap: 2rem;
     padding: 2rem;
-  }
+}
+
+.events-homepage #all-events h2, 
+.events-homepage #no-events-error {
+    grid-column: 1 / -1;
+}
+
+.events-homepage #all-events h2 {
+    text-align: center;
+}
+
+.events-homepage #all-events p#no-events-error {
+    font-size: 20px;
+    margin-top: 2rem;
+}
 
 .events-homepage #all-events article {
     display: flex;
@@ -124,18 +144,21 @@ body.events-homepage {
   }
 
 .events-homepage .short-desc,
-.events-homepage #all-events article time,
 .events-homepage #all-events article h3 {
     padding: 0.5rem;
     font-size: 18px;
   }
 
-
 .events-homepage .category,
-.events-homepage .view-details,
-.events-homepage time {
+.events-homepage .view-details {
     font-weight: bold;
-  }
+}
+
+.events-homepage #all-events article time {
+    padding: 0.5rem;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .events-homepage .category {
     background-color: cornsilk;
@@ -167,35 +190,13 @@ body.events-homepage {
     height: 180px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-  }
+}
 
-.events-homepage footer {
-    background-color: lightblue;
-    padding: 1.5rem;
-  }
-
-.events-homepage #top-row-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-.events-homepage footer p {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-.events-homepage #uni-address {
-    text-align: left;
-  }
-
-.events-homepage #contact-info {
-    text-align: right;
-  }
 
 .events-homepage #all-events a {
     color: black;
     text-decoration: none;
-  }
+}
 
 .events-homepage #search-error {
     text-align: center;
@@ -229,50 +230,6 @@ body.events-homepage {
 /* =========================
    EVENTS DETAILS PAGE
 ========================= */
-
-*.events-details-page {
-    margin: 0;
-    padding: 0;
-}
-
-body.events-details-page {
-    background-color: antiquewhite;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.8;
-    border: 1px solid black;
-
-    min-height: 100vh;
-}
-
-.events-details-page header nav {
-    display: flex;
-    text-align: center;
-    background-color: azure;
-    padding: 1rem;
-}
-
-.events-details-page nav ul {
-    display: flex;
-    flex: 3;
-    justify-content: space-evenly;
-    list-style: none;
-    padding: 1rem;
-}
-
-.events-details-page nav ul li {
-    margin: 1rem;
-}
-
-.events-details-page nav ul li a {
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: large;
-}
-
-.events-details-page nav ul li a:hover {
-    text-decoration: underline;
-}
 
 .events-details-page img {
     width: 100%;
@@ -355,29 +312,6 @@ body.events-details-page {
     cursor: pointer;
 }
 
-.events-details-page footer {
-    background-color: lightblue;
-    padding: 1.5rem;
-}
-
-.events-details-page #top-row-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.events-details-page footer p {
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.events-details-page #uni-address {
-    text-align: left;
-}
-
-.events-details-page #contact-info {
-    text-align: right;
-}
-
 
 @media (max-width: 900px) {
 
@@ -417,29 +351,29 @@ body.events-details-page {
    STYLING FOR BUTTONS
 ========================= */
 
-.home-button-container {
+.events-homepage .home-button-container {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
     padding: 1rem;
 }
 
-.home-admin-buttons {
+.events-homepage .home-admin-buttons {
     padding: 0.75rem;
     font-weight: bold;
     font-size: 20px;
     cursor: pointer;
 }
 
-#delete-btn {
+.events-homepage #delete-btn-home {
     color: red;
 }
 
-#update-btn {
+.events-homepage #update-btn-home {
     color: blue;
 }
 
-#create-btn {
+.events-homepage #create-btn {
   max-height: 100px;
   max-width: 275px;
   padding: 1rem;
@@ -457,14 +391,14 @@ body.events-details-page {
 ========================= */
 
 
-.details-button-container {
+.events-details-page .details-button-container {
     display: flex;
     justify-content: center;
     gap: 4rem;
     width: 100%;
 }
 
-.details-admin-buttons {
+.events-details-page .details-admin-buttons {
     padding: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -472,21 +406,39 @@ body.events-details-page {
     margin-bottom: 2rem;
 }
 
-#delete-btn {
+.events-details-page #delete-btn-details {
     color: red;
 }
 
-#update-btn {
+.events-details-page #update-btn-details {
     color: blue;
 }
 
 
 /* =========================
-   ADMIN EVENTS ALL FORM
-   PAGES STYLING
+   ADMIN EVENTS FORM PAGES
+   STYLING (CREATE AND
+   UPDATE FORMS)
 ========================= */
 
-.form-label-row {
+.admin-event-forms .event-forms {
+    max-width: 1300px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 3rem;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 900px) {
+    .admin-event-forms .event-forms {
+        width: 85%;
+        padding: 2rem;
+    }
+}
+
+.admin-event-forms .form-label-row {
     display: grid;
     grid-template-columns: 250px 1fr;
     align-items: start;
@@ -494,13 +446,13 @@ body.events-details-page {
     margin-bottom: 2rem;
 }
 
-.dropbox-wrapper {
+.admin-event-forms .dropbox-wrapper {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.submit-btn {
+.admin-event-forms .submit-btn {
     display: block;
     margin: 3rem auto;
     padding: 1rem;
@@ -509,52 +461,100 @@ body.events-details-page {
     cursor: pointer;
 }
 
-input, textarea, select {
+.admin-event-forms input, textarea, select {
     padding: 0.5rem;
     width: 100%;
     min-width: 200px;
 }
 
-select {
+.admin-event-forms select {
     max-width: 100px;
     max-height: 80px;
 }
 
-textarea {
+.admin-event-forms textarea {
     resize: vertical;
 }
 
-.error {
+.admin-event-forms .error {
     color: red;
     font-size: 0.9rem;
     margin-top: 0.25rem;
 }
 
-img#event-image {
+.admin-event-forms img#event-image {
     margin-bottom: 3rem;
 }
 
-label[for="image"] {
+.admin-event-forms label[for="image"] {
     margin-top: 0;
 }
 
-#category-btn-row {
+.admin-event-forms #current-img {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* =========================
+   ADMIN EVENTS FORM PAGES
+   STYLING (DELETE FORM)
+========================= */
+
+.admin-event-forms #delete-message {
+    margin: 2rem;
+    margin-top: 6rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+.admin-event-forms .delete-btn-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10rem auto;
+}
+
+.admin-event-forms .delete-form-btns {
+    padding: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-event-forms .delete-form-btns:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.admin-event-forms #form-delete-btn {
+    color: red;
+}
+
+.admin-event-forms #cancel-btn, 
+.admin-event-forms #form-view-details-btn {
+    color: blue;
+}
+
+
+/* =========================
+   ADMIN EVENTS FORM PAGES
+   STYLING (NEW CATEGORY FORM)
+========================= */
+
+.admin-event-forms #category-btn-row {
     display: flex;
     gap: 1rem;
     justify-content: space-between;
 }
 
-#category-header {
+.admin-event-forms #category-header {
     text-align: center;
     margin: 2rem;
 }
 
-#category-form {
+.admin-event-forms #category-form {
     margin: 4rem;
-    align-content: center;
 }
 
-#category-back-btn {
+.admin-event-forms #category-back-btn {
     background-color: rgb(235, 227, 227);
     border: 2px solid black;
     text-decoration: none;
@@ -565,7 +565,7 @@ label[for="image"] {
     font-weight: bold;
 }
 
-#category-submit-btn {
+.admin-event-forms #category-submit-btn {
     background-color: rgb(235, 227, 227);
     margin: 8rem auto;
     padding: 1rem;
@@ -573,52 +573,6 @@ label[for="image"] {
     font-weight: bold;
     cursor: pointer;
 }
-
-
-.search-container {
-    display: flex;
-    gap: 15px;
-}
-
-.search-btn {
-    padding: 0.5rem;
-    cursor: pointer;
-}
-
-/* delete form styling */
-
-#delete-content {
-    margin: 2rem;
-    margin-top: 6rem;
-    text-align: center;
-    font-size: 20px;
-}
-
-.delete-btn-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 10rem auto;
-}
-
-.delete-form-btns {
-    padding: 1.5rem;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.delete-form-btns:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#form-delete-btn {
-    color: red;
-}
-
-#cancel-btn, #form-view-details-btn {
-    color: blue;
-}
-
 
 /* =========================
    FLASH MESSAGE
@@ -659,4 +613,29 @@ aside#flash.delete {
     90% {
         translate: none;
     }
+}
+
+
+/* =========================
+   NOT FOUND PAGE
+========================= */
+
+.not-found-page #not-found {
+    margin: 3rem;
+    font-size: 25px;
+}
+
+.not-found-page #go-back-btn {
+    display: block;
+    margin: 150px auto;
+    padding: 15px 40px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.not-found-page #go-back-btn:hover {
+    color: navy;
+    border: 1px solid darkblue;
+    text-decoration: underline;
+    cursor: pointer;
 }

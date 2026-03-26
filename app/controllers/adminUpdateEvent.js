@@ -33,7 +33,7 @@ export function adminUpdateEventController(ctx) {
         contact2 = contacts[1]; // second contact (optional)
     }
 
-    return render(adminUpdateEventView, { events, categories, selectedCategoryId, contact1, contact2, formData, errors}, ctx, "events-details-page");
+    return render(adminUpdateEventView, { events, categories, selectedCategoryId, contact1, contact2, formData, errors}, ctx, "admin-event-forms");
 }
 
 

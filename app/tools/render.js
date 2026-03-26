@@ -21,18 +21,20 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
   }
 
   const flashMessage = flash ?
-  `<aside id="flash" class=${className}>
+  `<aside id="flash" class="${className}">
       <p>${escape(flash)}</p>
    </aside>`
    : '';
 
   headers.set("content-type", "text/html");
+
   const html = `
     <!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Hamza Kazi">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>University Events Management System</title>
         <link rel="stylesheet" href="/assets/styles.css">
         <link rel="icon" href="/assets/favicon2.svg">
