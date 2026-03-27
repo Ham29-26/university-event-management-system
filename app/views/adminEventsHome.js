@@ -33,14 +33,21 @@ export function adminEventsHomeView(data) {
             <p class="short-desc">${formatLineBreaks(escape(event.event_short_description))}</p>
             <p class="view-details">View Details</p>
     </a>
-    <div class="home-button-container">
-      <form action="/events/admin/event-deletion-confirmation/${event.event_id}/${formatURL(escape(event.event_name))}" method="GET">
-        <button class="home-admin-buttons" id="delete-btn-home">DELETE</button>
-      </form>
 
-      <form action="/events/admin/event-update-form/${event.category_id}/${event.event_id}/${formatURL(escape(event.event_name))}" method="GET">
-        <button class="home-admin-buttons" id="update-btn-home">UPDATE</button>
-      </form>
+    <div class="home-button-container">
+
+      <button type="button" 
+      onclick="location.href='/events/admin/event-deletion-confirmation/${event.event_id}/${formatURL(escape(event.event_name))}'" 
+      class="home-admin-buttons" id="delete-btn-home">
+      DELETE
+      </button>
+
+      <button type="button" 
+      onclick="location.href='/events/admin/event-update-form/${event.category_id}/${event.event_id}/${formatURL(escape(event.event_name))}'" 
+      class="home-admin-buttons" id="update-btn-home">
+      UPDATE
+      </button>
+
     </div>
     </article>
     `).join("");
@@ -60,8 +67,8 @@ export function adminEventsHomeView(data) {
       <ul>
         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-        <li><a href="#">Log out</a></li>
         <li><a href="/">Student Page</a></li>
+        <li><a href="/logout">Log Out</a></li>
       </ul>
 
       <form action="/events/admin/events-homepage" method="GET">
@@ -78,9 +85,9 @@ export function adminEventsHomeView(data) {
         <h2>${searchText || "All Events"}</h2>
         ${eventsHtml || `<p id="no-events-error">No events available for the search result.</p>`}
 
-        <form action="/events/admin/event-creation-form" method="GET">
-          <button id="create-btn">+ Create New Event</button>
-        </form>
+        <button type="button" onclick="location.href='/events/admin/event-creation-form'" id="create-btn">
+        + Create New Event
+        </button>
       </section>  
     </main>
     </div>

@@ -1,5 +1,5 @@
 import { escape } from "@std/html/entities";
-import { formatDate, formatLineBreaks, formatTime } from "../../assets/script.js";
+import { formatDate, formatLineBreaks, formatTime, formatURL } from "../../assets/script.js";
 
 export function eventsDetailsView(data) {
 
@@ -128,7 +128,11 @@ export function eventsDetailsView(data) {
         </aside>
       </section>
 
-      <button id="register-button" type="button">Register Now</button>
+      <button type="button"
+      onclick="location.href='/register/${data.events.event_id}/${formatURL(data.events.event_name)}'"
+      id="register-button">
+      Register Now
+      </button>
     </main>
     `
 }

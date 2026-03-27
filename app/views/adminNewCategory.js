@@ -31,8 +31,12 @@ export function adminNewCategoryView({ errors = {} }) {
            </div>
 
            <div id="category-btn-row">
-             <a href="/events/admin/event-creation-form" id="category-back-btn" class="button">Back to form</a>
-             <button id="category-submit-btn" type="submit">Submit</button>
+             <button type="button" onclick="location.href='/events/admin/event-creation-form'" 
+             class="new-category-btns">
+             Back to form
+             </button>
+
+             <button type="submit" class="new-category-btns">Submit</button>
            </div>
           </form>
     </main>

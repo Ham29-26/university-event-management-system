@@ -5,9 +5,10 @@ export function notFoundView() {
         <h2>Not Found</h2>
         <p>The requested resource does not exist.</p>
 
-        <form action="/" method="GET">
-          <button id="go-back-btn">Go to Homepage</button>
-        </form>
+        <button type="button" onclick="location.href='/'" id="go-back-btn">
+        Go to Homepage
+        </button>
+        
       </section>
     </div>
     `

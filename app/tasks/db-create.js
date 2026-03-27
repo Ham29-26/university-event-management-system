@@ -292,7 +292,7 @@ NULL,
 '2026-02-23',
 '15:00',
 '18:00',
-'University Conference Hall'
+'American University Dubai Conference Hall'
 ),
 
 (4,
@@ -348,48 +348,48 @@ INSERT INTO contacts (
 -- ================= SPORTS =================
 
 -- 1 Football Tryouts
-(1, '⚽ Men''s Football Team Coach', 'Daniel Carter', 'daniel.carter@university.edu', '+1 555-210-1001'),
-(1, '⚽ Women''s Football Team Coach', 'Sophia Martinez', 'sophia.martinez@university.edu', '+1 555-210-1002'),
+(1, '⚽ Men''s Football Team Coach', 'Daniel Carter', 'daniel.carter@university.edu', '+971502101001'),
+(1, '⚽ Women''s Football Team Coach', 'Sophia Martinez', 'sophia.martinez@university.edu', '+971562101002'),
 
 -- 2 Campus Marathon
-(2, '🏃‍♂️ Event Coordinator', 'Liam Johnson', 'liam.johnson@citysports.org', '+1 555-320-2001'),
+(2, '🏃‍♂️ Event Coordinator', 'Liam Johnson', 'liam.johnson@citysports.org', '+971563202001'),
 
 -- 3 Basketball Tryouts
-(3, '🏀 Men''s Basketball Team Coach', 'Marcus Reynolds', 'marcus.reynolds@university.edu', '+1 555-210-3001'),
-(3, '🏀 Women''s Basketball Team Coach', 'Emily Foster', 'emily.foster@university.edu', '+1 555-210-3002'),
+(3, '🏀 Men''s Basketball Team Coach', 'Marcus Reynolds', 'marcus.reynolds@university.edu', '+971552103001'),
+(3, '🏀 Women''s Basketball Team Coach', 'Emily Foster', 'emily.foster@university.edu', '+971582103002'),
 
 -- ================= MUSIC =================
 
 -- 4 Battle of the Bands
-(4, '🎸 Music Club President', 'Aiden Brooks', 'aiden.brooks@university.edu', '+1 555-410-4001'),
+(4, '🎸 Music Club President', 'Aiden Brooks', 'aiden.brooks@university.edu', '+971554104001'),
 
 -- 5 Classical Music Competition
-(5, '🎻 Faculty Music Director', 'Dr. Isabella Clarke', 'isabella.clarke@northbridge.edu', '+1 555-510-5001'),
+(5, '🎻 Faculty Music Director', 'Dr. Isabella Clarke', 'isabella.clarke@northbridge.edu', '+971565105001'),
 
 -- 6 Choir & Orchestra Festival
-(6, '🎼 Festival Coordinator', 'Oliver Bennett', 'oliver.bennett@grandexpo.org', '+1 555-610-6001'),
-(6, '🎤 Ensemble Liaison Officer', 'Charlotte Hayes', 'charlotte.hayes@university.edu', '+1 555-610-6002'),
+(6, '🎼 Festival Coordinator', 'Oliver Bennett', 'oliver.bennett@grandexpo.org', '+971556106001'),
+(6, '🎤 Ensemble Liaison Officer', 'Charlotte Hayes', 'charlotte.hayes@university.edu', '+971586106002'),
 
 -- ================= THEATRE =================
 
 -- 7 Hamlet Auditions
-(7, '🎭 Drama Society Director', 'Nathan Collins', 'nathan.collins@university.edu', '+1 555-710-7001'),
+(7, '🎭 Drama Society Director', 'Nathan Collins', 'nathan.collins@university.edu', '+971587107001'),
 
 -- 8 Romeo & Juliet
-(8, '🎭 Theatre Production Manager', 'Grace Mitchell', 'grace.mitchell@university.edu', '+1 555-720-8001'),
+(8, '🎭 Theatre Production Manager', 'Grace Mitchell', 'grace.mitchell@university.edu', '+971557208001'),
 
 -- 9 Talent Showcase
-(9, '🌟 Cultural Events Coordinator', 'Lucas Anderson', 'lucas.anderson@university.edu', '+1 555-730-9001'),
+(9, '🌟 Cultural Events Coordinator', 'Lucas Anderson', 'lucas.anderson@university.edu', '+971507309001'),
 
 -- ================= ACADEMIC =================
 
 -- 10 Debate Championship
-(10, '🗣 Debate Society Chair', 'Benjamin Wright', 'benjamin.wright@university.edu', '+1 555-810-1001'),
+(10, '🗣 Debate Society Chair', 'Benjamin Wright', 'benjamin.wright@american-university.edu', '+971558101001'),
 
 -- 11 Hackathon
-(11, '💻 Technical Lead', 'Ethan Parker', 'ethan.parker@techsphere.edu', '+1 555-820-1101'),
-(11, '🧠 Innovation Mentor', 'Dr. Maya Singh', 'maya.singh@techsphere.edu', '+1 555-820-1102'),
+(11, '💻 Technical Lead', 'Ethan Parker', 'ethan.parker@techsphere.edu', '+971588201101'),
+(11, '🧠 Innovation Mentor', 'Dr. Maya Singh', 'maya.singh@techsphere.edu', '+971558201102'),
 
 -- 12 Model UN
-(12, '🌍 MUN Secretary-General', 'Hannah Lewis', 'hannah.lewis@westbridge.edu', '+1 555-830-1201');
+(12, '🌍 MUN Secretary-General', 'Hannah Lewis', 'hannah.lewis@westbridge.edu', '+971508301201');
 `);

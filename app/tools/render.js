@@ -51,17 +51,17 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
         <address id="uni-address">
           <h4>Address</h4>
           123 University Avenue<br />
-          Leicester, UK<br />
+          Dubai, UAE<br />
           LE1 XXX<br />
         </address>
 
         <address id="contact-info">
           <h4>Contact Information</h4>
           Email:
-          <a href="mailto:info@imaginaryuniversity.ac.uk"
-            >info@imaginaryuniversity.ac.uk</a
+          <a href="mailto:info@imaginaryuniversity.ae"
+            >info@imaginaryuniversity.ae</a
           ><br />
-          Phone: +44 1234 567890
+          Phone: +971561234567
         </address>
       </div>
 

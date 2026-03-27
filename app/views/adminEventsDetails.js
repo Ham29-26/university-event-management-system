@@ -81,7 +81,7 @@ export function adminEventsDetailsView(data) {
       <ul>
         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-        <li><a href="#">Log out</a></li>
+        <li><a href="/logout">Log Out</a></li>
       </ul>
     </nav>
 
@@ -124,17 +124,20 @@ export function adminEventsDetailsView(data) {
         </aside>
       </section>
 
-      <button id="register-button" type="button">Register Now</button>
-
       <div class="details-button-container">
 
-        <form action="/events/admin/event-deletion-confirmation/${data.events.event_id}/${formatURL(escape(data.events.event_name))}" method="GET">
-          <button class="details-admin-buttons" id="delete-btn-details" >DELETE</button>
-        </form>
+        <button type="button"
+        onclick="location.href='/events/admin/event-deletion-confirmation/${data.events.event_id}/${formatURL(escape(data.events.event_name))}'" 
+        class="details-admin-buttons" id="delete-btn-details">
+        DELETE
+        </button>
 
-        <form action="/events/admin/event-update-form/${data.events.category_id}/${data.events.event_id}/${formatURL(escape(data.events.event_name))}" method="GET">
-          <button class="details-admin-buttons" id="update-btn-details">UPDATE</button>
-        </form>
+        <button type="button"
+        onclick="location.href='/events/admin/event-update-form/${data.events.category_id}/${data.events.event_id}/${formatURL(escape(data.events.event_name))}'" 
+        class="details-admin-buttons" id="update-btn-details">
+        UPDATE
+        </button>
+        
       </div>
     </main>
     `

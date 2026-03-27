@@ -303,12 +303,6 @@ footer p {
     margin: 60px auto;
     padding: 15px 40px;
     font-size: large;
-}
-
-.events-details-page #register-button:hover {
-    color: navy;
-    border: 1px solid darkblue;
-    text-decoration: underline;
     cursor: pointer;
 }
 
@@ -517,10 +511,6 @@ footer p {
     padding: 1.5rem;
     font-size: 20px;
     font-weight: bold;
-}
-
-.admin-event-forms .delete-form-btns:hover {
-    text-decoration: underline;
     cursor: pointer;
 }
 
@@ -542,7 +532,7 @@ footer p {
 .admin-event-forms #category-btn-row {
     display: flex;
     gap: 1rem;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .admin-event-forms #category-header {
@@ -554,21 +544,9 @@ footer p {
     margin: 4rem;
 }
 
-.admin-event-forms #category-back-btn {
-    background-color: rgb(235, 227, 227);
-    border: 2px solid black;
-    text-decoration: none;
-    color: black;
+.admin-event-forms .new-category-btns {
     margin: 8rem auto;
-    padding: 1rem;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.admin-event-forms #category-submit-btn {
-    background-color: rgb(235, 227, 227);
-    margin: 8rem auto;
-    padding: 1rem;
+    padding: 1.5rem;
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
