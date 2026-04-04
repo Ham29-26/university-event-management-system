@@ -45,21 +45,19 @@ export function eventsHomeView(data) {
 
   
   return`
-    <div class="page-wrapper">
     <header>
       <h1>Events at Imaginary University</h1>
-      <br>
       <p>Explore upcoming events and register to participate</p>
     </header>
 
     <nav>
-      <ul>
+      <ul class="navigation-links">
         <li><a href="/">All Events</a></li>
         ${categoriesNav}
         <li><a href="/events/admin/events-homepage">Admin Page</a></li>
       </ul>
 
-      <form action="/" method="GET">
+      <form action="/" method="GET" class="search-bar">
         <div class="search-container">
           <label for="search-category">Search:</label>
           <input type="search" id="search-category" name="search-student" placeholder="Type an event to search"/>
@@ -74,7 +72,6 @@ export function eventsHomeView(data) {
         ${eventsHtml || `<p id="no-events-error">No events available for the search result.</p>`}
       </section>  
     </main>
-    </div>
     `
 }
 

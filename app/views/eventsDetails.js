@@ -83,7 +83,7 @@ export function eventsDetailsView(data) {
 
     return `
     <nav>
-      <ul>
+      <ul class="navigation-links">
         <li><a href="/">All Events</a></li>
         ${categoriesNav}
       </ul>

@@ -47,26 +47,27 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
         ${content}
 
         <footer>
-        <div id="top-row-container">
-        <address id="uni-address">
-          <h4>Address</h4>
-          123 University Avenue<br />
-          Dubai, UAE<br />
-          LE1 XXX<br />
-        </address>
+         <div id="footer-top-row-container">
+          <address id="uni-address">
+            <h4>Address</h4>
+            123 University Avenue<br />
+            Dubai, UAE<br />
+            LE1 XXX<br />
+          </address>
 
-        <address id="contact-info">
-          <h4>Contact Information</h4>
-          Email:
-          <a href="mailto:info@imaginaryuniversity.ae"
-            >info@imaginaryuniversity.ae</a
-          ><br />
-          Phone: +971561234567
-        </address>
-      </div>
+          <address id="contact-info">
+            <h4>Contact Information</h4>
+            Email:
+            <a href="mailto:info@imaginaryuniversity.ae"
+              >info@imaginaryuniversity.ae</a
+            ><br />
+            Phone: +971561234567
+          </address>
+         </div>
 
-      <p>© 2026 Imaginary University. All rights reserved.</p>
-      </footer>
+         <p>© 2026 Imaginary University. All rights reserved.</p>
+        </footer>
+      
       <script src="/assets/script.js"></script>
       </body>
     </html>

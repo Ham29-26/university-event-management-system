@@ -8,9 +8,8 @@ export function adminNewCategoryView({ errors = {} }) {
   const newCategory = f["new-category-name"] || {};
 
     return `
-    <div class="page-wrapper">
       <nav>
-        <ul>
+        <ul class="navigation-links">
           <li><a href="/events/admin/events-homepage">Dashboard</a></li>
           <li><a href="/events/admin/event-creation-form">Create Event</a></li>
           <li><a href="#">Log out</a></li>
@@ -40,6 +39,5 @@ export function adminNewCategoryView({ errors = {} }) {
            </div>
           </form>
     </main>
-    </div>
     `
 }

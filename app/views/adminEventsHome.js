@@ -56,22 +56,20 @@ export function adminEventsHomeView(data) {
 
   
   return`
-    <div class="page-wrapper">
     <header>
       <h1>Admin events page</h1>
-      <br>
       <p>Create, Delete and Update events</p>
     </header>
 
     <nav>
-      <ul>
+      <ul class="navigation-links">
         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
         <li><a href="/">Student Page</a></li>
         <li><a href="/logout">Log Out</a></li>
       </ul>
 
-      <form action="/events/admin/events-homepage" method="GET">
+      <form action="/events/admin/events-homepage" method="GET" class="search-bar">
         <div class="search-container">
           <label for="search-category">Search:</label>
           <input type="search" id="search-category" name="search-admin" placeholder="Type an event to search">
@@ -90,7 +88,6 @@ export function adminEventsHomeView(data) {
         </button>
       </section>  
     </main>
-    </div>
     `
 }
 

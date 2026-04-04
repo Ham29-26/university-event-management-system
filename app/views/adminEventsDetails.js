@@ -78,7 +78,7 @@ export function adminEventsDetailsView(data) {
 
     return `
     <nav>
-      <ul>
+      <ul class="navigation-links">
         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
         <li><a href="/logout">Log Out</a></li>
@@ -93,7 +93,7 @@ export function adminEventsDetailsView(data) {
         >
       </section>
 
-      <section class="event-content-wrapper">
+      <section class="event-layout">
         <article class="event-description">
           <h1>${escape(data.events.event_name)}</h1>
 
@@ -109,7 +109,7 @@ export function adminEventsDetailsView(data) {
           </p>
         </article>
 
-        <aside class="event-aside">
+        <aside class="event-sidebar">
           <h3>Event Information</h3>
 
           <p>📅 <strong>Date:</strong> ${formatDate(escape(data.events.event_date))}</p>
@@ -137,7 +137,7 @@ export function adminEventsDetailsView(data) {
         class="details-admin-buttons" id="update-btn-details">
         UPDATE
         </button>
-        
+
       </div>
     </main>
     `

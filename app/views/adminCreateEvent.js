@@ -50,282 +50,288 @@ export function adminCreateEventView({ categories, errors = {} }) {
 
     return `
      <nav>
-       <ul>
+       <ul class="navigation-links">
          <li><a href="/events/admin/events-homepage">Dashboard</a></li>
          <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-         <li><a href="/">Student Page</a></li>
-         <li><a href="#">Log out</a></li>
+         <li><a href="/logout">Log Out</a></li>
        </ul>
      </nav>
 
      <main>
         <article class="event-forms">
+        
           <h1>Create Event</h1>
-          <h2>Event Card Details</h2><br>
+
 
           <form method="POST" enctype="multipart/form-data">
-          <div class="form-label-row">
-                <label for="event-category">Event Category: </label>
-                <div class="dropbox-wrapper">
-                   <select id="event-category" name="category-id">
-                   <option value="" disabled ${!eventCategory.value? "selected" : ""}>Select a category</option>
-                   ${selectCategory}
-                   </select>
-                   ${eventCategory.message || ""}
-                   <br>
-                   <a href="/events/admin/add-new-category-form">+Add New Category</a>
+
+          <section class="event-card-details">
+              <h2 class="form-headings">Event Card Details</h2>
+
+              <div class="form-label-row">
+                    <label for="event-category">Event Category: </label>
+                    <div class="dropbox-wrapper">
+                      <select id="event-category" name="category-id">
+                      <option value="" disabled ${!eventCategory.value? "selected" : ""}>Select a category</option>
+                      ${selectCategory}
+                      </select>
+                      ${eventCategory.message || ""}
+                      <br>
+                      <a href="/events/admin/add-new-category-form">+Add New Category</a>
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="form-label-row">
-              <label for="event-name">Event Name: </label>
+                <div class="form-label-row">
+                  <label for="event-name">Event Name: </label>
 
-              <div class="input-group">
-                <input type="text" id="event-name" name="event-name"${eventName.value}>
-                ${eventName.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <input type="text" id="event-name" name="event-name"${eventName.value}>
+                    ${eventName.message || ""}
+                  </div>
+                </div>
 
-            <div class="form-label-row">
-              <label for="event-date">Event Date: </label>
+                <div class="form-label-row">
+                  <label for="event-date">Event Date: </label>
 
-              <div class="input-group">
-                <input type="date" id="event-date" name="event-date"${eventDate.value}>
-                ${eventDate.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <input type="date" id="event-date" name="event-date"${eventDate.value}>
+                    ${eventDate.message || ""}
+                  </div>
+                </div>
 
-            <div class="form-label-row">
-              <label for="event-short-desc">Short Description on the Event: </label>
+                <div class="form-label-row">
+                  <label for="event-short-desc">Short Description on the Event: </label>
 
-              <div class="input-group">
-                <textarea name="event-short-desc" rows="10" cols="30" placeholder="Enter a short description of your event here....">${eventShortDesc.text || ""}</textarea>
-              ${eventShortDesc.message || ""}
-              </div>
-            </div>
-
-            <br>
-
-            <h2>Events details page information</h2>
-
-            <h3>(Required)</h3>
-
-            <div class="form-label-row">
-              <label for="event-long-desc">Long Description on the Event: </label>
-
-              <div class="input-group">
-                <textarea name="event-long-desc" rows="25" cols="45" placeholder="Enter a long description of your event here....">${eventLongDesc.text || ""}</textarea>
-                ${eventLongDesc.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <textarea name="event-short-desc" rows="10" cols="30" placeholder="Enter a short description of your event here....">${eventShortDesc.text || ""}</textarea>
+                  ${eventShortDesc.message || ""}
+                  </div>
+                </div>
+            </section>
 
 
-            <h3>(Optional)</h3>
+            <section class="event-details-info">
+                <h2 class="form-headings">Events details page information</h2>
 
-            <div class="form-label-row">
-              <label for="section1-title">Event sub-heading 1 Title: </label>
+                <h3>(Required)</h3>
 
-              <div class="input-group">
-                <input type="text" id="section1-title" name="section1-title"${section1Title.value || ""}>
-                ${section1Title.message || ""}
-              </div>
-            </div>
+                <div class="form-label-row">
+                  <label for="event-long-desc">Long Description on the Event: </label>
 
-            <div class="form-label-row">
-              <label for="section1-desc">Event sub-heading 1 Content: </label>
-
-              <div class="input-group">
-                <textarea name="section1-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 1 here....">${section1Desc.text || ""}</textarea>
-                ${section1Desc.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <textarea name="event-long-desc" rows="25" cols="45" placeholder="Enter a long description of your event here....">${eventLongDesc.text || ""}</textarea>
+                    ${eventLongDesc.message || ""}
+                  </div>
+                </div>
 
 
-            <h3>(Optional)</h3>
+                <h3>(Optional)</h3>
 
-            <div class="form-label-row">
-              <label for="section2-title">Event sub-heading 2 Title: </label>
+                <div class="form-label-row">
+                  <label for="section1-title">Event sub-heading 1 Title: </label>
 
-              <div class="input-group">
-              <input type="text" id="section2-title" name="section2-title"${section2Title.value || ""}>
-              ${section2Title.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <input type="text" id="section1-title" name="section1-title"${section1Title.value || ""}>
+                    ${section1Title.message || ""}
+                  </div>
+                </div>
 
-            <div class="form-label-row">
-              <label for="section2-desc">Event sub-heading 2 Content: </label>
+                <div class="form-label-row">
+                  <label for="section1-desc">Event sub-heading 1 Content: </label>
 
-              <div class="input-group">
-                <textarea name="section2-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 2 here....">${section2Desc.text || ""}</textarea>
-                ${section2Desc.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <textarea name="section1-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 1 here....">${section1Desc.text || ""}</textarea>
+                    ${section1Desc.message || ""}
+                  </div>
+                </div>
 
-            <h3>(Optional)</h3>
 
-            <div class="form-label-row">
-              <label for="section3-title">Event sub-heading 3 Title: </label>
+                <h3>(Optional)</h3>
 
-              <div class="input-group">
-              <input type="text" id="section3-title" name="section3-title"${section3Title.value || ""}>
-              ${section3Title.message || ""}
-              </div>
-            </div>
+                <div class="form-label-row">
+                  <label for="section2-title">Event sub-heading 2 Title: </label>
 
-            <div class="form-label-row">
-              <label for="section3-desc">Event sub-heading 3 Content: </label>
-              
-              <div class="input-group">
-                <textarea name="section3-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 3 here....">${section3Desc.text || ""}</textarea>
-                ${section3Desc.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                  <input type="text" id="section2-title" name="section2-title"${section2Title.value || ""}>
+                  ${section2Title.message || ""}
+                  </div>
+                </div>
 
-            <h3>(Required)</h3>
+                <div class="form-label-row">
+                  <label for="section2-desc">Event sub-heading 2 Content: </label>
 
-            <div class="form-label-row">
-              <label for="registration-deadline">Registration Deadline: </label>
+                  <div class="input-group">
+                    <textarea name="section2-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 2 here....">${section2Desc.text || ""}</textarea>
+                    ${section2Desc.message || ""}
+                  </div>
+                </div>
 
-              <div class="input-group">
-                <input type="date" id="registration-deadline" name="registration-deadline"${registrationDeadline.value || ""}>
-                ${registrationDeadline.message || ""}
-              </div>
-            </div>
+                <h3>(Optional)</h3>
 
-            <br>
+                <div class="form-label-row">
+                  <label for="section3-title">Event sub-heading 3 Title: </label>
 
-            <h2>Event Information & Contact Details</h2><br>
+                  <div class="input-group">
+                  <input type="text" id="section3-title" name="section3-title"${section3Title.value || ""}>
+                  ${section3Title.message || ""}
+                  </div>
+                </div>
 
-            <div class="form-label-row">
-              <label for="event-start-time"><strong>(Required)</strong> Start Time: </label>
+                <div class="form-label-row">
+                  <label for="section3-desc">Event sub-heading 3 Content: </label>
+                  
+                  <div class="input-group">
+                    <textarea name="section3-desc" rows="25" cols="45" placeholder="Enter the details of sub-heading 3 here....">${section3Desc.text || ""}</textarea>
+                    ${section3Desc.message || ""}
+                  </div>
+                </div>
 
-              <div class="input-group">
-                <input type="time" id="event-start-time" name="event-start-time"${startTime.value || ""}>
-                ${startTime.message || ""}
-              </div>
-            </div>
+                <h3>(Required)</h3>
 
-            <div class="form-label-row">
-              <label for="event-end-time"><strong>(Optional)</strong> Event End Time: </label>
-              <input type="time" id="event-end-time" name="event-end-time">
-            </div>
+                <div class="form-label-row">
+                  <label for="registration-deadline">Registration Deadline: </label>
 
-            <div class="form-label-row">
-              <label for="event-location">Event Location: </label>
+                  <div class="input-group">
+                    <input type="date" id="registration-deadline" name="registration-deadline"${registrationDeadline.value || ""}>
+                    ${registrationDeadline.message || ""}
+                  </div>
+                </div>
+            </section>
 
-              <div class="input-group">
-                <input type="text" id="event-location" name="event-location"${eventLocation.value || ""}>
-                ${eventLocation.message || ""}
-              </div>
-            </div>
 
-            <h3>(Required)</h3>
+            <section class="event-contact">
+                <h2 class="form-headings">Event Information & Contact Details</h2><br>
 
-            <div class="form-label-row">
-              <label for="contact1-name">Event Contact 1 Name: </label>
+                <div class="form-label-row">
+                  <label for="event-start-time"><strong>(Required)</strong> Start Time: </label>
 
-              <div class="input-group">
-                <input type="text" id="contact1-name" name="contact1-name"${contact1Name.value || ""}>
-                ${contact1Name.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <input type="time" id="event-start-time" name="event-start-time"${startTime.value || ""}>
+                    ${startTime.message || ""}
+                  </div>
+                </div>
 
-            <div class="form-label-row">
-              <label for="contact1-designation">Event Contact 1 Designation: </label>
+                <div class="form-label-row">
+                  <label for="event-end-time"><strong>(Optional)</strong> Event End Time: </label>
+                  <input type="time" id="event-end-time" name="event-end-time">
+                </div>
 
-              <div class="input-group">
-                <input type="text" id="contact1-designation" name="contact1-designation"${contact1Designation.value || ""}>
-                ${contact1Designation.message || ""}
-              </div>
-            </div>
+                <div class="form-label-row">
+                  <label for="event-location">Event Location: </label>
 
-            <div class="form-label-row">
-              <label for="contact1-phone">Event Contact 1 Phone Number: </label>
+                  <div class="input-group">
+                    <input type="text" id="event-location" name="event-location"${eventLocation.value || ""}>
+                    ${eventLocation.message || ""}
+                  </div>
+                </div>
 
-              <div class="input-group">
-                <input type="tel" id="contact1-phone" name="contact1-phone" 
-                placeholder="Phone number should be in the format +971561234567"${contact1Phone.value || ""}>
-                ${contact1Phone.message || ""}
-              </div>
-            </div>
-            
-            <div class="form-label-row">
-              <label for="contact1-email">Event Contact 1 Email ID: </label>
+                <h3>(Required)</h3>
 
-              <div class="input-group">
-                <input type="email" id="contact1-email" name="contact1-email"${contact1Email.value || ""}>
-                ${contact1Email.message || ""}
-              </div>
-            </div>
-            
+                <div class="form-label-row">
+                  <label for="contact1-name">Event Contact 1 Name: </label>
 
-            <h3>(Optional)</h3>
-            <small><strong>Fill all Contact 2 fields or leave all empty.</strong></small>
+                  <div class="input-group">
+                    <input type="text" id="contact1-name" name="contact1-name"${contact1Name.value || ""}>
+                    ${contact1Name.message || ""}
+                  </div>
+                </div>
 
-            <br><br>
+                <div class="form-label-row">
+                  <label for="contact1-designation">Event Contact 1 Designation: </label>
 
-            <div class="form-label-row">
-              <label for="contact2-name">Event Contact 2 Name: </label>
+                  <div class="input-group">
+                    <input type="text" id="contact1-designation" name="contact1-designation"${contact1Designation.value || ""}>
+                    ${contact1Designation.message || ""}
+                  </div>
+                </div>
 
-              <div class="input-group">
-                <input type="text" id="contact2-name" name="contact2-name"${contact2Name.value || ""}>
-                ${contact2Name.message || ""}
-              </div>
-            </div>
+                <div class="form-label-row">
+                  <label for="contact1-phone">Event Contact 1 Phone Number: </label>
 
-            <div class="form-label-row">
-              <label for="contact2-designation">Event Contact 2 Designation: </label>
+                  <div class="input-group">
+                    <input type="tel" id="contact1-phone" name="contact1-phone" 
+                    placeholder="Phone number should be in the format +971561234567"${contact1Phone.value || ""}>
+                    ${contact1Phone.message || ""}
+                  </div>
+                </div>
+                
+                <div class="form-label-row">
+                  <label for="contact1-email">Event Contact 1 Email ID: </label>
 
-              <div class="input-group">
-                <input type="text" id="contact2-designation" name="contact2-designation"${contact2Designation.value || ""}>
-                ${contact2Designation.message || ""}
-              </div>
-            </div>
+                  <div class="input-group">
+                    <input type="email" id="contact1-email" name="contact1-email"${contact1Email.value || ""}>
+                    ${contact1Email.message || ""}
+                  </div>
+                </div>
+                
 
-            <div class="form-label-row">
-              <label for="contact2-phone">Event Contact 2 Phone Number: </label>
+                <h3>(Optional)</h3>
+                <small><strong>Fill all Contact 2 fields or leave all empty.</strong></small>
 
-              <div class="input-group">
-                <input type="tel" id="contact2-phone" name="contact2-phone" 
-                placeholder="Phone number should be in the format +971561234567"${contact2Phone.value || ""}>
-                ${contact2Phone.message || ""}
-              </div>
-            </div>
-            
-            <div class="form-label-row">
-              <label for="contact2-email">Event Contact 2 Email ID: </label>
+                <br><br>
 
-              <div class="input-group">
-                <input type="email" id="contact2-email" name="contact2-email"${contact2Email.value || ""}>
-                ${contact2Email.message || ""}
-              </div>
-            </div>
+                <div class="form-label-row">
+                  <label for="contact2-name">Event Contact 2 Name: </label>
 
-            <br>
+                  <div class="input-group">
+                    <input type="text" id="contact2-name" name="contact2-name"${contact2Name.value || ""}>
+                    ${contact2Name.message || ""}
+                  </div>
+                </div>
 
-            <h2>Event Image</h2>
+                <div class="form-label-row">
+                  <label for="contact2-designation">Event Contact 2 Designation: </label>
 
-            <br>
+                  <div class="input-group">
+                    <input type="text" id="contact2-designation" name="contact2-designation"${contact2Designation.value || ""}>
+                    ${contact2Designation.message || ""}
+                  </div>
+                </div>
 
-            <p class="form-hint">
-              Please upload an image for the event in any suitable image format (JPG, PNG, etc.).
-            </p>
+                <div class="form-label-row">
+                  <label for="contact2-phone">Event Contact 2 Phone Number: </label>
 
-            <p class="form-hint">
-              If you have already selected an image but made other changes, please re-upload it to keep it.
-            </p>
+                  <div class="input-group">
+                    <input type="tel" id="contact2-phone" name="contact2-phone" 
+                    placeholder="Phone number should be in the format +971561234567"${contact2Phone.value || ""}>
+                    ${contact2Phone.message || ""}
+                  </div>
+                </div>
+                
+                <div class="form-label-row">
+                  <label for="contact2-email">Event Contact 2 Email ID: </label>
 
-            <br>
+                  <div class="input-group">
+                    <input type="email" id="contact2-email" name="contact2-email"${contact2Email.value || ""}>
+                    ${contact2Email.message || ""}
+                  </div>
+                </div>
+            </section>
 
-            <div class="form-label-row">
-              <label for="image">Upload Event Image: </label>
 
-              <div class="input-group">
-                <input type="file" id="image-link" name="event-image" accept="image/*">
-                ${eventImage.message || ""}
-              </div> 
-            </div>
+            <section class="event-image">
+                <h2 class="form-headings">Event Image</h2>
+
+                <p class="form-hint">
+                  Please upload an image for the event in any suitable image format (JPG, PNG, etc.).
+                </p>
+
+                <p class="form-hint">
+                  If you have already selected an image but made other changes, please re-upload it to keep it.
+                </p>
+
+                <br>
+
+                <div class="form-label-row">
+                  <label for="image">Upload Event Image: </label>
+
+                  <div class="input-group">
+                    <input type="file" id="image-link" name="event-image" accept="image/*">
+                    ${eventImage.message || ""}
+                  </div> 
+                </div>
+            </section>
 
             <button class="submit-btn" type="submit">Submit All</button>
 
