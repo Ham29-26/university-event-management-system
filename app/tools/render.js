@@ -42,6 +42,14 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
 
       <body class="${bodyClass}">
 
+      <header class="global-header">
+          <h1>Imaginary University Event Management System</h1>
+          <nav>
+            <a href="/">home</a>
+            <a href="/login">sign in</a>
+          </nav>
+      </header>
+
         ${flashMessage}
 
         ${content}

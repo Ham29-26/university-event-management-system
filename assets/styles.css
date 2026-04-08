@@ -12,6 +12,45 @@ body {
     grid-template-rows: auto 1fr;
 }
 
+/* HEADER */
+.global-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #2f4f4f;
+  color: #f0f8ff;
+}
+
+/* TITLE */
+.global-header h1 {
+  margin: 0;
+  font-weight: 300;
+}
+
+/* NAV LAYOUT */
+.global-header nav {
+  display: flex;
+  gap: 1rem;
+  background: none;
+}
+
+/* LINKS = BUTTONS */
+.global-header nav a {
+  display: inline-block;
+  color: #f0f8ff;
+  text-decoration: none;
+  background-color: rgba(255,255,255,0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* HOVER */
+.global-header nav a:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
 header {
     text-align: center;
     padding: 2rem;
@@ -87,6 +126,73 @@ footer p {
 .search-btn {
     padding: 0.5rem;
     cursor: pointer;
+}
+
+
+/* =========================
+   SIGN IN / LOGIN FORMS
+   PAGES
+========================= */
+
+form.auth {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+    place-self: center;
+
+    background-color: #eef6f7;
+    color: #333;
+
+    padding: 2rem;
+    border-top: none;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+form.auth label {
+    text-align: right;
+}
+
+form.auth button {
+    grid-column: 2;
+    place-self: end;
+}
+
+.auth-toggle {
+    grid-column: 1 / -1;
+    display: flex;
+    margin: -2rem -2rem 1rem -2rem;
+}
+
+/* DEFAULT TAB */
+.auth-toggle a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.6rem;
+    background-color: #dbeff0;
+    color: #2f4f4f;
+    border-bottom: none;
+    transition: 0.2s;
+}
+
+/* HOVER */
+.auth-toggle a:hover {
+    background-color: #cfe5e7;
+}
+
+/* ACTIVE TAB */
+.auth-toggle a.active {
+    background-color: #eef6f7;
+    color: #2f4f4f;
+    border-bottom: none;
+
+    position: relative;
+    z-index: 2;
+}
+
+.center {
+    text-align: center;
 }
 
 

@@ -192,7 +192,7 @@ null,
 'Campus Choir & Orchestra Festival',
 '2026-05-15',
 'An inter-university choir and orchestra festival celebrating classical and contemporary ensemble music.',
-'https://music.ua.edu/wp-content/uploads/2025/05/Campus-Orchestra.png',
+'https://www.umsl.edu/music/performance-groups/orchestra2.2025.jpg',
 'Hosted at the Grand City Exhibition Centre, this large-scale music festival gathers university choirs and orchestras from across the region. Our university is honored to participate in this cultural showcase.',
 'Participation Format',
 '– Each ensemble will perform a 20-minute curated repertoire.

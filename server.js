@@ -16,6 +16,8 @@ import { validate } from "./app/middleware/validate.js";
 import { eventSchema } from "./app/schema/eventSchema.js";
 import { newCategorySchema } from "./app/schema/newCategorySchema.js"
 import { updateEventSchema } from "./app/schema/updateEventSchema.js";
+import { adminLoginFormController, studentLoginFormController } from "./app/controllers/sessions.js";
+import { registrationFormController } from "./app/controllers/users.js";
 
 const eventsApp = new EventsRouter();
 
@@ -44,6 +46,10 @@ eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController
 
 eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController);
 eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController);
+
+eventsApp.get("/login", studentLoginFormController);
+eventsApp.get("/admin-login", adminLoginFormController)
+eventsApp.get("/register", registrationFormController);
 
 eventsApp.get("*", notFoundController);
 eventsApp.post("*", notFoundController);
