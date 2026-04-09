@@ -4,6 +4,19 @@ db.exec(`
     DROP TABLE IF EXISTS events;
     DROP TABLE IF EXISTS categories;
     DROP TABLE IF EXISTS contacts;
+    DROP TABLE IF EXISTS users;
+
+    CREATE TABLE users (
+        username TEXT PRIMARY KEY,
+        hashedPassword TEXT NOT NULL,
+        role TEXT NOT NULL CHECK(role IN('student', 'admin'))
+    );
+
+    CREATE TABLE sessions (
+        id TEXT PRIMARY KEY,
+        username TEXT NOT NULL,
+        FOREIGN KEY (username) REFERENCES users(username)
+    );
 
     CREATE TABLE categories (
        category_id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -2,9 +2,18 @@ import { escape } from "@std/html/entities";
 import { getFlash } from "./flash.js";
 
 export default function render(viewFn, data, ctx, bodyClass = "") {
-  const { request, headers, status = 200 } = ctx;
+  const { request, headers, session, status = 200 } = ctx;
 
   const content = viewFn(data);
+
+  const links = `
+    ${session 
+      ? `<form method="POST" action="/logout"><button>sign out</button></form>
+        `
+        : `<a href="/">home</a>
+           <a href="/student-login">sign in</a>
+        `}
+  `;
 
   // retrieving flash messages if there are any
   const flash = getFlash(request.headers, headers);
@@ -12,11 +21,11 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
   let className;
   const flashText = flash?.toLowerCase();
 
-  if (flashText?.includes("created") || flashText?.includes("added")) {
+  if (flashText?.includes("created") || flashText?.includes("added") || flashText?.includes("logged in")) {
     className = "create";
   } else if (flashText?.includes("updated")) {
     className = "update";
-  } else if (flashText?.includes("deleted")) {
+  } else if (flashText?.includes("deleted") || flashText?.includes("Logged out")) {
     className = "delete";
   }
 
@@ -45,8 +54,7 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
       <header class="global-header">
           <h1>Imaginary University Event Management System</h1>
           <nav>
-            <a href="/">home</a>
-            <a href="/login">sign in</a>
+            ${links}
           </nav>
       </header>
 

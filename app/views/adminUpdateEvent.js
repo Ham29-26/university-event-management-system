@@ -100,7 +100,6 @@ export function adminUpdateEventView(data) {
       <ul class="navigation-links">
         <li><a href="/events/admin/events-homepage">Dashboard</a></li>
         <li><a href="/events/admin/event-creation-form">Create Event</a></li>
-        <li><a href="/logout">Log Out</a></li>
       </ul>
     </nav>
 

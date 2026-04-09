@@ -1,4 +1,5 @@
 import { getCategories } from "../models/categories.js";
+import { usernameExists } from "../models/users.js";
 
 export function required(name, value) {
     if (!value) {
@@ -79,6 +80,13 @@ export function categoryExists(name, value) {
         }
     }
 }
+
+// function to check if the given username already exists
+export function usernameAvailable(name, value) {
+    if (usernameExists(value)) {
+        return `${name} "${value}" is already taken. Please choose another username.`
+    }
+} 
 
 export function validateField(name, value, validators) {
     for (const validator of validators) {

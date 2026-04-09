@@ -16,14 +16,18 @@ import { validate } from "./app/middleware/validate.js";
 import { eventSchema } from "./app/schema/eventSchema.js";
 import { newCategorySchema } from "./app/schema/newCategorySchema.js"
 import { updateEventSchema } from "./app/schema/updateEventSchema.js";
-import { adminLoginFormController, studentLoginFormController } from "./app/controllers/sessions.js";
-import { registrationFormController } from "./app/controllers/users.js";
+import { addSessionController, deleteSessionController, adminLoginFormController, studentLoginFormController } from "./app/controllers/sessions.js";
+import { addUserController, signUpController } from "./app/controllers/users.js";
+import { loginSchema } from "./app/schema/loginSchema.js";
+import { withSession } from "./app/middleware/auth.js";
+import { signUpSchema } from "./app/schema/signUpSchema.js";
 
 const eventsApp = new EventsRouter();
 
 // running all global middleware functions
 eventsApp.use(withHeaders);
 eventsApp.use(withLogs);
+eventsApp.use(withSession);
 
 // student facing pages
 eventsApp.get("/assets/*", staticController);
@@ -47,9 +51,22 @@ eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController
 eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController);
 eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController);
 
-eventsApp.get("/login", studentLoginFormController);
-eventsApp.get("/admin-login", adminLoginFormController)
-eventsApp.get("/register", registrationFormController);
+eventsApp.get("/sign-up", signUpController);
+eventsApp.post("/sign-up", signUpController, validate(signUpSchema), addUserController);
+
+eventsApp.get("/student-login", studentLoginFormController);
+eventsApp.post("/student-login", studentLoginFormController, validate(loginSchema), (ctx, next) => {
+    ctx.loginType= "student";
+    return addSessionController(ctx, next);
+});
+
+eventsApp.get("/admin-login", adminLoginFormController);
+eventsApp.post("/admin-login", adminLoginFormController, validate(loginSchema), (ctx, next) => {
+    ctx.loginType = "admin";
+    return addSessionController(ctx, next);
+});
+
+eventsApp.post("/logout", deleteSessionController);
 
 eventsApp.get("*", notFoundController);
 eventsApp.post("*", notFoundController);

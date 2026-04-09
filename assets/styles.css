@@ -35,8 +35,9 @@ body {
   background: none;
 }
 
-/* LINKS = BUTTONS */
-.global-header nav a {
+/* LINKS & BUTTONS */
+.global-header nav a,
+.global-header nav button {
   display: inline-block;
   color: #f0f8ff;
   text-decoration: none;
@@ -44,11 +45,16 @@ body {
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   font-weight: 500;
+
+  font: inherit;
+  border: none;
 }
 
 /* HOVER */
-.global-header nav a:hover {
+.global-header nav a:hover,
+.global-header nav button:hover {
   background-color: rgba(255,255,255,0.3);
+  cursor: pointer;
 }
 
 header {
@@ -137,7 +143,7 @@ footer p {
 form.auth {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 0.5rem;
+    gap: 1rem;
     place-self: center;
 
     background-color: #eef6f7;
@@ -193,6 +199,7 @@ form.auth button {
 
 .center {
     text-align: center;
+    margin-top: 3rem;
 }
 
 

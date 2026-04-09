@@ -1,20 +1,25 @@
+import { createUser } from "../models/users.js";
+import { login } from "../tools/auth.js";
+import { redirect } from "../tools/redirect.js";
 import render from "../tools/render.js";
-import { registrationFormView } from "../views/auth.js";
+import { signUpView } from "../views/auth.js";
 
-export function registrationFormController(ctx) {
-    return render(registrationFormView, {}, ctx)
+export function signUpController(ctx) {
+    const { errors } = ctx;
+
+    return render(signUpView, { errors }, ctx, "admin-event-forms")
 }
 
-export async function addUsersController(ctx) {
-    const { formData } = ctx;
-    const username = formData.get("username");
-    const password = formData.get("password");
+export async function addUserController(ctx, next) {
+    const { isValid, validated, headers } = ctx;
+    if (!isValid) return next(ctx);
 
-    // validate the incoming data here
-    
+    await createUser({
+        ...validated,
+        role: "student"
+    });
 
-    // create the user record here
-    console.log("new user: ", username);
-    console.log("password: ", password);
-    
+    login(headers, validated.username);
+
+    return redirect(headers, "/", `Student '${validated.username}' account created`);
 }
