@@ -19,8 +19,9 @@ import { updateEventSchema } from "./app/schema/updateEventSchema.js";
 import { addSessionController, deleteSessionController, adminLoginFormController, studentLoginFormController } from "./app/controllers/sessions.js";
 import { addUserController, signUpController } from "./app/controllers/users.js";
 import { loginSchema } from "./app/schema/loginSchema.js";
-import { withSession } from "./app/middleware/auth.js";
+import { excludesSession, requiresAdmin, requiresSession, withSession } from "./app/middleware/auth.js";
 import { signUpSchema } from "./app/schema/signUpSchema.js";
+import { indexController } from "./app/controllers/index.js";
 
 const eventsApp = new EventsRouter();
 
@@ -29,44 +30,47 @@ eventsApp.use(withHeaders);
 eventsApp.use(withLogs);
 eventsApp.use(withSession);
 
-// student facing pages
+// universal pages
 eventsApp.get("/assets/*", staticController);
-eventsApp.get("/", eventsHomeController);
+eventsApp.get("/", indexController, excludesSession);
+
+// student facing pages
+eventsApp.get("/events/events-homepage", eventsHomeController);
 eventsApp.get("/events/events-details/*", eventsDetailsController);
 eventsApp.get("/events/category=:category/:categoryId", eventsCategoriesController);
 
 // admin facing pages
-eventsApp.get("/events/admin/events-homepage", adminEventsHomeController);
-eventsApp.get("/events/admin/events-details/*", adminEventsDetailsController);
+eventsApp.get("/events/admin/events-homepage", adminEventsHomeController, requiresAdmin);
+eventsApp.get("/events/admin/events-details/*", adminEventsDetailsController, requiresAdmin);
 
-eventsApp.get("/events/admin/event-creation-form", adminCreateEventController);
-eventsApp.post("/events/admin/event-creation-form", adminCreateEventController, validate(eventSchema), addEventsController);
+eventsApp.get("/events/admin/event-creation-form", adminCreateEventController, requiresAdmin);
+eventsApp.post("/events/admin/event-creation-form", adminCreateEventController, requiresAdmin, validate(eventSchema), addEventsController);
 
-eventsApp.get("/events/admin/event-update-form/*", adminUpdateEventController);
-eventsApp.post("/events/admin/event-update-form/*", adminUpdateEventController, validate(updateEventSchema), addUpdateEventController);
+eventsApp.get("/events/admin/event-update-form/*", adminUpdateEventController, requiresAdmin);
+eventsApp.post("/events/admin/event-update-form/*", adminUpdateEventController, requiresAdmin, validate(updateEventSchema), addUpdateEventController);
 
-eventsApp.get("/events/admin/add-new-category-form", adminNewCategoryController);
-eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController, validate(newCategorySchema), addNewCategoryController);
+eventsApp.get("/events/admin/add-new-category-form", adminNewCategoryController, requiresAdmin);
+eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController, requiresAdmin, validate(newCategorySchema), addNewCategoryController);
 
-eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController);
-eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController);
+eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController, requiresAdmin);
+eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController, requiresAdmin);
 
-eventsApp.get("/sign-up", signUpController);
-eventsApp.post("/sign-up", signUpController, validate(signUpSchema), addUserController);
+eventsApp.get("/sign-up", signUpController, excludesSession);
+eventsApp.post("/sign-up", signUpController, excludesSession, validate(signUpSchema), addUserController);
 
-eventsApp.get("/student-login", studentLoginFormController);
-eventsApp.post("/student-login", studentLoginFormController, validate(loginSchema), (ctx, next) => {
+eventsApp.get("/student-login", studentLoginFormController, excludesSession);
+eventsApp.post("/student-login", studentLoginFormController, excludesSession, validate(loginSchema), (ctx, next) => {
     ctx.loginType= "student";
     return addSessionController(ctx, next);
 });
 
-eventsApp.get("/admin-login", adminLoginFormController);
-eventsApp.post("/admin-login", adminLoginFormController, validate(loginSchema), (ctx, next) => {
+eventsApp.get("/admin-login", adminLoginFormController, excludesSession);
+eventsApp.post("/admin-login", adminLoginFormController, excludesSession, validate(loginSchema), (ctx, next) => {
     ctx.loginType = "admin";
     return addSessionController(ctx, next);
 });
 
-eventsApp.post("/logout", deleteSessionController);
+eventsApp.post("/logout", deleteSessionController, requiresSession);
 
 eventsApp.get("*", notFoundController);
 eventsApp.post("*", notFoundController);

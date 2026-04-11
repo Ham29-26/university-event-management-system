@@ -1,11 +1,16 @@
 import { db } from "../tools/db.js";
 
-export function createSession(username) {
+export function createSession(user) {
     const sessionId = crypto.randomUUID();
     db.prepare(`
-        INSERT INTO sessions (id, username) 
-        VALUES (:sessionId, :username)
-    `).run({ sessionId, username });
+        INSERT INTO sessions (id, username, role) 
+        VALUES (:id, :username, :role)
+    `).run({ 
+        id: sessionId, 
+        username: user.username,
+        role: user.role 
+    });
+
     return sessionId;
 }
 

@@ -15,6 +15,7 @@ db.exec(`
     CREATE TABLE sessions (
         id TEXT PRIMARY KEY,
         username TEXT NOT NULL,
+        role TEXT NOT NULL CHECK(role IN('student', 'admin')),
         FOREIGN KEY (username) REFERENCES users(username)
     );
 

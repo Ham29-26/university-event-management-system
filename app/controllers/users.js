@@ -19,7 +19,10 @@ export async function addUserController(ctx, next) {
         role: "student"
     });
 
-    login(headers, validated.username);
+    login(headers, {
+        username: validated.username,
+        role: "student"
+    });
 
-    return redirect(headers, "/", `Student '${validated.username}' account created`);
+    return redirect(headers, "/events/events-homepage", `Student '${validated.username}' account created`);
 }

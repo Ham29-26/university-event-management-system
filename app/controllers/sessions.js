@@ -36,13 +36,13 @@ export async function addSessionController(ctx, next) {
         return redirect(headers, `/${loginType}-login`, "Invalid Credentials")
     }
 
-    login(headers, user.username);
+    login(headers, user);
 
     // ROLE-BASED REDIRECT
     if (user.role === "admin") {
-        return redirect(headers, "events/admin/events-homepage", `Admin '${validated.username}' logged in successfully!`);
+        return redirect(headers, "/events/admin/events-homepage", `Admin '${validated.username}' logged in successfully!`);
     } else {
-        return redirect(headers, "/", `Student '${validated.username}' logged in successfully!`);
+        return redirect(headers, "/events/events-homepage", `Student '${validated.username}' logged in successfully!`);
     }
 }
 

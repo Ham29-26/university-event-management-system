@@ -204,8 +204,18 @@ form.auth button {
 
 
 /* =========================
-   EVENTS HOME PAGE
+   INDEX & EVENTS HOME PAGE
 ========================= */
+
+#index {
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+#index p {
+    padding-top: 2rem;
+    font-size: 20px;
+}
 
 .events-homepage #all-events {
     display: grid;
