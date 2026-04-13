@@ -3,7 +3,7 @@ import { formatURL } from "../../assets/script.js";
 
 export function adminDeleteEventView(data) {
     return `
-      <nav>
+      <nav class="main-nav">
         <ul class="navigation-links">
           <li><a href="/events/admin/events-homepage">Dashboard</a></li>
           <li><a href="/events/admin/event-creation-form">Create Event</a></li>

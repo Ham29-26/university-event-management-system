@@ -26,6 +26,26 @@ export async function saveImage(imageFile, eventName) {
     return `/assets/event-images/${finalFileName}`;
 }
 
+export async function saveProfileImage(imageFile, username) {
+
+    const extension = imageFile.name.split(".").pop();
+    
+    const uuid = crypto.randomUUID();
+    
+    const fileName = `${formatURL(username)}-${uuid}`;
+    
+    const finalFileName = `${fileName}.${extension}`;
+    
+    const buffer = await imageFile.arrayBuffer();
+    
+    await Deno.writeFile(
+        `./assets/profile-pictures/others/${finalFileName}`,
+        new Uint8Array(buffer)
+    );
+    
+    return `/assets/profile-pictures/others/${finalFileName}`;
+}
+
 export async function deleteImage(eventImageLink) {
 
     // add "." so the path works from the project directory

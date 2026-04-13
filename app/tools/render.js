@@ -2,16 +2,36 @@ import { escape } from "@std/html/entities";
 import { getFlash } from "./flash.js";
 
 export default function render(viewFn, data, ctx, bodyClass = "") {
-  const { request, headers, session, status = 200 } = ctx;
+  const { request, headers, session, user, status = 200 } = ctx;
 
   const content = viewFn(data);
 
+  let homeLink;
+
+  if (session && user.role == "student") {
+    homeLink = "/events/events-homepage"
+  } else if (session && user.role == "admin") {
+    homeLink = "/events/admin/events-homepage"
+  } 
+
   const links = `
     ${session 
-      ? `<form method="POST" action="/logout"><button>sign out</button></form>
+      ? `<a href="${homeLink}">Home</a>
+
+         <a href="/events/profile" class="profile-link">
+          <figure class="profile-widget">
+            <img src="${user.profile_image_url}" alt="Profile picture">
+            <figcaption>
+              <span class="username">${user.username}</span>
+              <span class="role">${user.role}</span>
+            </figcaption>
+          </figure>
+        </a>
+        
+         <form method="POST" action="/logout"><button>Sign Out</button></form>
         `
-        : `<a href="/">home</a>
-           <a href="/student-login">sign in</a>
+        : `<a href="/">Home</a>
+           <a href="/student-login">Sign In</a>
         `}
   `;
 

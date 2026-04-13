@@ -31,12 +31,12 @@ body {
 /* NAV LAYOUT */
 .global-header nav {
   display: flex;
-  gap: 1rem;
-  background: none;
+  gap: 2rem;
+  align-items: center;
 }
 
 /* LINKS & BUTTONS */
-.global-header nav a,
+.global-header nav a:not(.profile-link),
 .global-header nav button {
   display: inline-block;
   color: #f0f8ff;
@@ -50,8 +50,49 @@ body {
   border: none;
 }
 
+.profile-link {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.profile-widget {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-widget img {
+    width: 64px !important;
+    height: 64px !important;
+
+    border-radius: 50% !important;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-widget figcaption {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: white;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.profile-widget .username {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.profile-widget .role {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
 /* HOVER */
-.global-header nav a:hover,
+.global-header nav a:not(.profile-link):hover,
 .global-header nav button:hover {
   background-color: rgba(255,255,255,0.3);
   cursor: pointer;
@@ -64,7 +105,7 @@ header {
     color: white;
 }
 
-nav {
+.main-nav {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -72,7 +113,7 @@ nav {
     padding: 1rem;
 }
 
-nav .navigation-links {
+.main-nav .navigation-links {
     display: flex;
     flex: 3;
     justify-content: space-evenly;
@@ -80,22 +121,22 @@ nav .navigation-links {
     padding: 1rem;
 }
 
-nav .navigation-links li {
+.main-nav .navigation-links li {
     margin: 1rem;
 }
 
-nav .navigation-links li a {
+.main-nav .navigation-links li a {
     color: black;
     text-decoration: none;
     font-weight: bold;
     font-size: large;
 }
 
-nav .navigation-links li a:hover {
+.main-nav .navigation-links li a:hover {
     text-decoration: underline;
 }
 
-nav .search-bar {
+.main-nav .search-bar {
     flex: 1;
     padding: 2rem;
     align-content: center;
@@ -132,6 +173,13 @@ footer p {
 .search-btn {
     padding: 0.5rem;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .global-header nav {
+        flex-direction: column;
+        margin-left: 2rem;
+    }
 }
 
 
@@ -199,12 +247,13 @@ form.auth button {
 
 .center {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 
 /* =========================
-   INDEX & EVENTS HOME PAGE
+   INDEX, PROFILE
+   & EVENTS HOME PAGE
 ========================= */
 
 #index {
@@ -215,6 +264,14 @@ form.auth button {
 #index p {
     padding-top: 2rem;
     font-size: 20px;
+}
+
+.profile {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: whitesmoke;
+    border-radius: 10px;
 }
 
 .events-homepage #all-events {

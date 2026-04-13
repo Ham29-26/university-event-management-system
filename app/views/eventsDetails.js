@@ -82,7 +82,7 @@ export function eventsDetailsView(data) {
 
 
     return `
-    <nav>
+    <nav class="main-nav">
       <ul class="navigation-links">
         <li><a href="/events/events-homepage">All Events</a></li>
         ${categoriesNav}
@@ -97,7 +97,7 @@ export function eventsDetailsView(data) {
         >
       </section>
 
-      <section class="event-content-wrapper">
+      <section class="event-layout">
         <article class="event-description">
           <h1>${escape(data.events.event_name)}</h1>
 
@@ -113,7 +113,7 @@ export function eventsDetailsView(data) {
           </p>
         </article>
 
-        <aside class="event-aside">
+        <aside class="event-sidebar">
           <h3>Event Information</h3>
 
           <p>📅 <strong>Date:</strong> ${formatDate(escape(data.events.event_date))}</p>

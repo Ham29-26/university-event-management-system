@@ -10,13 +10,21 @@ const options = {
 }
 
 
-export async function createUser({ username, password, role }) {
+export async function createUser({ username, password, name, email, role }) {
     const hashedPassword = await hashPassword(password)
     
     db.prepare(`
-        INSERT INTO users (username, hashedPassword, role) 
-        VALUES (:username, :hashedPassword, :role)
-    `).run({ username, hashedPassword, role });
+        INSERT INTO users (username, hashedPassword, name, email, role) 
+        VALUES (:username, :hashedPassword, :name, :email, :role)
+    `).run({ username, hashedPassword, name, email, role });
+}
+
+export function updateProfilePicture({ username, profileImagePath }) {
+    db.prepare(`
+        UPDATE users
+        SET profile_image_url = :profileImagePath
+        WHERE username = :username
+    `).run({ username, profileImagePath });
 }
 
 export function usernameExists(username) {
@@ -27,9 +35,17 @@ export function usernameExists(username) {
     return !!user;
 }
 
-function getUser(username) {
+export function getUser(username) {
     return db.prepare(`
         SELECT * FROM users WHERE username=:username
+    `).get({ username });
+}
+
+export function getUserByUsername(username) {
+    return db.prepare(`
+        SELECT username, name, email, role, profile_image_url
+        FROM users
+        WHERE username=:username
     `).get({ username });
 }
 

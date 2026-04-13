@@ -50,7 +50,7 @@ export function eventsHomeView(data) {
       <p>Explore upcoming events and register to participate</p>
     </header>
 
-    <nav>
+    <nav class="main-nav">
       <ul class="navigation-links">
         <li><a href="/events/events-homepage">All Events</a></li>
         ${categoriesNav}

@@ -22,6 +22,9 @@ import { loginSchema } from "./app/schema/loginSchema.js";
 import { excludesSession, requiresAdmin, requiresSession, withSession } from "./app/middleware/auth.js";
 import { signUpSchema } from "./app/schema/signUpSchema.js";
 import { indexController } from "./app/controllers/index.js";
+import { addUpdateProfileImageController, profileController } from "./app/controllers/profile.js";
+import { withUser } from "./app/middleware/withUser.js";
+import { profileSchema } from "./app/schema/profileSchema.js";
 
 const eventsApp = new EventsRouter();
 
@@ -29,10 +32,15 @@ const eventsApp = new EventsRouter();
 eventsApp.use(withHeaders);
 eventsApp.use(withLogs);
 eventsApp.use(withSession);
+eventsApp.use(withUser);
 
 // universal pages
 eventsApp.get("/assets/*", staticController);
 eventsApp.get("/", indexController, excludesSession);
+
+// profile page for both students and admins
+eventsApp.get("/events/profile", profileController, requiresSession);
+eventsApp.post("/events/profile", profileController, requiresSession, validate(profileSchema), addUpdateProfileImageController);
 
 // student facing pages
 eventsApp.get("/events/events-homepage", eventsHomeController);

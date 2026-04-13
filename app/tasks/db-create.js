@@ -1,15 +1,19 @@
 import { db } from "../tools/db.js";
 
 db.exec(`
+    DROP TABLE IF EXISTS contacts;
     DROP TABLE IF EXISTS events;
     DROP TABLE IF EXISTS categories;
-    DROP TABLE IF EXISTS contacts;
+    DROP TABLE IF EXISTS sessions;
     DROP TABLE IF EXISTS users;
 
     CREATE TABLE users (
         username TEXT PRIMARY KEY,
         hashedPassword TEXT NOT NULL,
-        role TEXT NOT NULL CHECK(role IN('student', 'admin'))
+        name TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        role TEXT NOT NULL CHECK(role IN('student', 'admin')),
+        profile_image_url TEXT NOT NULL DEFAULT '/assets/profile-pictures/default/default.png'
     );
 
     CREATE TABLE sessions (

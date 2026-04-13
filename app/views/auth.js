@@ -39,8 +39,8 @@ export function loginFormView({type = "student", errors = { username: {}, passwo
 }
 
 
-export function signUpView({ errors = { username: {}, password: {} } }) {
-    const { username, password } = fragments(errors);
+export function signUpView({ errors = { username: {}, password: {}, name: {}, email: {} } }) {
+    const { username, password, name, email } = fragments(errors);
 
     return `
     <section aria-labelledby="register-heading" class="center">
@@ -51,6 +51,18 @@ export function signUpView({ errors = { username: {}, password: {} } }) {
            <div class="input-group">
              <input id="username" name="username"${username.value}>
              ${username.message}
+           </div>
+
+           <label for="name">Full Name: </label>
+           <div class="input-group">
+             <input id="name" name="name"${name.value}>
+             ${name.message}
+           </div>
+
+           <label for="email">E-mail: </label>
+           <div class="input-group">
+             <input id="email" name="email" type="email"${email.value}>
+             ${email.message}
            </div>
 
            <label for="password">Password: </label>
