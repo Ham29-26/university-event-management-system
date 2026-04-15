@@ -37,6 +37,8 @@ export function eventsCategoriesView(data) {
         <header>
           <h1>Events at Imaginary University</h1>
           <p>Explore upcoming events and register to participate</p>
+
+          <a href="/register" class="cta-register">Register for an Event</a>
         </header>
     
         <nav class="main-nav">

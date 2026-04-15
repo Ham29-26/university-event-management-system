@@ -7,16 +7,21 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
   const content = viewFn(data);
 
   let homeLink;
+  let registrationLink;
 
   if (session && user.role == "student") {
-    homeLink = "/events/events-homepage"
+    homeLink = "/events/events-homepage";
+    registrationLink = `<a href="/events/my-registrations">My Registrations</a>`;
   } else if (session && user.role == "admin") {
-    homeLink = "/events/admin/events-homepage"
-  } 
+    homeLink = "/events/admin/events-homepage";
+    registrationLink = `<a href="/events/admin/registrations">Registrations</a>`;
+  }
+
 
   const links = `
     ${session 
       ? `<a href="${homeLink}">Home</a>
+         ${registrationLink}
 
          <a href="/events/profile" class="profile-link">
           <figure class="profile-widget">
@@ -41,7 +46,7 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
   let className;
   const flashText = flash?.toLowerCase();
 
-  if (flashText?.includes("created") || flashText?.includes("added") || flashText?.includes("logged in")) {
+  if (flashText?.includes("created") || flashText?.includes("added") || flashText?.includes("logged in") || flashText?.includes("Successfully registered")) {
     className = "create";
   } else if (flashText?.includes("updated")) {
     className = "update";

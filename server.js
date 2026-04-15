@@ -25,6 +25,9 @@ import { indexController } from "./app/controllers/index.js";
 import { addUpdateProfileImageController, profileController } from "./app/controllers/profile.js";
 import { withUser } from "./app/middleware/withUser.js";
 import { profileSchema } from "./app/schema/profileSchema.js";
+import { addRegistrationController, registrationController } from "./app/controllers/register.js";
+import { registerSchema } from "./app/schema/registerSchema.js";
+import { adminRegistrationsController, studentRegistrationsController } from "./app/controllers/registrations.js";
 
 const eventsApp = new EventsRouter();
 
@@ -43,9 +46,16 @@ eventsApp.get("/events/profile", profileController, requiresSession);
 eventsApp.post("/events/profile", profileController, requiresSession, validate(profileSchema), addUpdateProfileImageController);
 
 // student facing pages
-eventsApp.get("/events/events-homepage", eventsHomeController);
-eventsApp.get("/events/events-details/*", eventsDetailsController);
-eventsApp.get("/events/category=:category/:categoryId", eventsCategoriesController);
+eventsApp.get("/events/events-homepage", eventsHomeController, requiresSession);
+eventsApp.get("/events/events-details/*", eventsDetailsController, requiresSession);
+eventsApp.get("/events/category=:category/:categoryId", eventsCategoriesController, requiresSession);
+
+eventsApp.get("/register", registrationController, requiresSession);
+eventsApp.post("/register", registrationController, requiresSession, validate(registerSchema), addRegistrationController);
+eventsApp.get("/register/*", registrationController, requiresSession);
+eventsApp.post("/register/*", registrationController, requiresSession, validate(registerSchema), addRegistrationController);
+
+eventsApp.get("/events/my-registrations", studentRegistrationsController, requiresSession);
 
 // admin facing pages
 eventsApp.get("/events/admin/events-homepage", adminEventsHomeController, requiresAdmin);
@@ -62,6 +72,8 @@ eventsApp.post("/events/admin/add-new-category-form", adminNewCategoryController
 
 eventsApp.get("/events/admin/event-deletion-confirmation/*", adminDeleteEventController, requiresAdmin);
 eventsApp.post("/events/admin/event-deletion-confirmation/*", addDeleteEventController, requiresAdmin);
+
+eventsApp.get("/events/admin/registrations", adminRegistrationsController, requiresAdmin);
 
 eventsApp.get("/sign-up", signUpController, excludesSession);
 eventsApp.post("/sign-up", signUpController, excludesSession, validate(signUpSchema), addUserController);

@@ -66,6 +66,20 @@ db.exec(`
     );
 
 
+    CREATE TABLE registrations (
+       username TEXT NOT NULL,
+       event_id INTEGER NOT NULL,
+       student_id TEXT NOT NULL,
+       phone TEXT NOT NULL,
+       year INTEGER NOT NULL,
+
+       PRIMARY KEY (username, event_id),
+
+       FOREIGN KEY (username) REFERENCES users(username),
+       FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
+    );
+
+
 
     INSERT INTO categories (category_name) VALUES
     ('Sports'),

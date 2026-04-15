@@ -121,7 +121,7 @@ export function adminUpdateEventView(data) {
                       </select>
                       ${eventCategoryError.message || ""}
                     </div>
-                </div>
+              </div>
 
               <div class="form-label-row">
                 <label for="event-name">Event Name: </label>
