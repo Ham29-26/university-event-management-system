@@ -46,11 +46,11 @@ export default function render(viewFn, data, ctx, bodyClass = "") {
   let className;
   const flashText = flash?.toLowerCase();
 
-  if (flashText?.includes("created") || flashText?.includes("added") || flashText?.includes("logged in") || flashText?.includes("Successfully registered")) {
+  if (flashText?.includes("created") || flashText?.includes("added") || flashText?.includes("logged in") || flashText?.includes("registered")) {
     className = "create";
   } else if (flashText?.includes("updated")) {
     className = "update";
-  } else if (flashText?.includes("deleted") || flashText?.includes("Logged out")) {
+  } else if (flashText?.includes("deleted") || flashText?.includes("Logged out") || flashText?.includes("cancelled")) {
     className = "delete";
   }
 

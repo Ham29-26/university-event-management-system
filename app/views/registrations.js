@@ -1,16 +1,31 @@
+import { formatDate } from "../../assets/script.js";
+
 export function studentRegistrationsView(data) {
     const registrations = data.registrations;
 
     const registrationHtml = 
     registrations.map(registration => `
-        <p><strong>Event:</strong> ${registration.event_name}</p>
-        <p><strong>📅 Date:</strong> ${registration.event_date}</p>
-        <p><strong>📍 Location:</strong> ${registration.event_location}</p>
+    <div class="registration-card">
+    
+        <div class="registration-header">
+            <h3>${registration.event_name}</h3>
+            <span class="event-date">📅 ${formatDate(registration.event_date)}</span>
+        </div>
 
-        <p><strong>📱 Phone Number:</strong> ${registration.phone}</p>
-        <p><strong>🎓 Year:</strong> ${registration.year}</p>
+        <div class="registration-body">
+            <p>📍 ${registration.event_location}</p>
+            <p>📱 ${registration.phone}</p>
+            <p>🎓 Year ${registration.year}</p>
+        </div>
 
-        <button>Cancel Registration</button>
+        <div class="registration-actions">
+            <button type="button" class="cancel-btn"
+            onclick="location.href='/events/delete-registration/${registration.event_id}'">
+                Cancel Registration
+            </button>
+        </div>
+
+  </div>
     `
     ).join("");
     
@@ -19,34 +34,63 @@ export function studentRegistrationsView(data) {
         <h1>My Registered Events</h1>
       </header>
 
-      <main>
+      <main class="registration-styles">
         ${registrationHtml || "<p>No registrations yet.</p>"}
       </main>
     `;
 }
 
-export function adminRegistrationsView(data) {
-    const registrations = data.registrations;
+export function adminRegistrationsView({ groupedRegistrations = {}, events = [], selectedEventId }) {
+    
+   const dropdown = events.map(event => `
+  <option value="${event.event_id}"
+    ${event.event_id == selectedEventId ? "selected" : ""}>
+    ${event.event_name} (${formatDate(event.event_date)})
+  </option>
+`).join("");
 
-    const registrationHtml = 
-    registrations.map(r => `
-        <div>
-            <h3>${r.event_name}</h3>
-            <p>📅 ${r.event_date}</p>
-            <p>👤 ${r.student_name}</p>
-            <p>🎓 Year: ${r.year}</p>
-            <p>📱 ${r.phone}</p>
+const html = Object.entries(groupedRegistrations).map(([eventName, regs]) => `
+  
+  <div class="registration-card">
+
+    <div class="registration-header">
+      <h3>${eventName}</h3>
+      <span class="event-date">
+        📅 ${formatDate(regs[0].event_date)} • ${regs.length} students
+      </span>
+    </div>
+
+    <div class="registration-body">
+
+      ${regs.map((r, i) => `
+        <div class="student-row">
+          <p><strong>${i + 1}. ${r.student_name}</strong></p>
+          <p>📱 ${r.phone}</p>
+          <p>🎓 Year ${r.year}</p>
         </div>
-        <hr>
-    `).join("");
+      `).join("")}
+
+    </div>
+
+  </div>
+
+`).join("");
 
     return `
     <header>
-        <h1>All Registrations</h1>
+        <h1>Manage Registrations</h1>
     </header>
 
-    <main>
-        ${registrationHtml || "<p>No registrations yet.<p>"}
+    <form method="GET" action="/events/admin/registrations" class="registration-filter">
+        <select name="event-id">
+            <option value="">All Events</option>
+            ${dropdown}
+        </select>
+        <button>Filter</button>
+    </form>
+
+    <main class="registration-styles">
+        ${html || "<p class='empty'>No registrations yet.</p>"}
     </main>
-    `
+    `;
 }

@@ -28,6 +28,7 @@ import { profileSchema } from "./app/schema/profileSchema.js";
 import { addRegistrationController, registrationController } from "./app/controllers/register.js";
 import { registerSchema } from "./app/schema/registerSchema.js";
 import { adminRegistrationsController, studentRegistrationsController } from "./app/controllers/registrations.js";
+import { addDeleteRegistrationController, deleteRegistrationController } from "./app/controllers/deleteRegistration.js";
 
 const eventsApp = new EventsRouter();
 
@@ -56,6 +57,9 @@ eventsApp.get("/register/*", registrationController, requiresSession);
 eventsApp.post("/register/*", registrationController, requiresSession, validate(registerSchema), addRegistrationController);
 
 eventsApp.get("/events/my-registrations", studentRegistrationsController, requiresSession);
+
+eventsApp.get("/events/delete-registration/*", deleteRegistrationController, requiresSession);
+eventsApp.post("/events/delete-registration/*", addDeleteRegistrationController, requiresSession);
 
 // admin facing pages
 eventsApp.get("/events/admin/events-homepage", adminEventsHomeController, requiresAdmin);

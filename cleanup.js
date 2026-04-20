@@ -13,6 +13,6 @@ import { db } from "./app/tools/db.js";
 
 //db.prepare("DELETE FROM contacts WHERE contact_id = 60").run();
 
-db.exec("DELETE FROM sessions");
+db.exec("DELETE FROM users WHERE username = 'actualUsername'");
 
 console.log("Duplicates removed!");

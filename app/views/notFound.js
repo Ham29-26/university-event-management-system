@@ -13,6 +13,7 @@ export function notFoundView(data) {
   }
 
     return `
+    <main>
       <section id="not-found">
         <h2>Not Found</h2>
         <p>The requested resource does not exist.</p>
@@ -22,5 +23,6 @@ export function notFoundView(data) {
         </button>
         
       </section>
+    </main>
     `
 }

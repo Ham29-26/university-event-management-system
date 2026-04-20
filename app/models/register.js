@@ -23,7 +23,8 @@ export function getAllRegistrations() {
 // gets all the registrations for a particular user (student)
 export function getRegistrationsByUser(username) {
     return db.prepare(`
-        SELECT 
+        SELECT
+            registrations.event_id, 
             registrations.*,
             events.event_name,
             events.event_date,
@@ -64,6 +65,17 @@ export function addRegistration({ username, eventId, studentId, phone, year }) {
         student_id: studentId, 
         phone, 
         year 
+    });
+}
+
+export function deleteRegistration({ username, eventId}) {
+    db.prepare(`
+        DELETE FROM registrations
+        WHERE username = :username
+        AND event_id = :event_id
+    `).run({ 
+        username, 
+        event_id: eventId 
     });
 }
 

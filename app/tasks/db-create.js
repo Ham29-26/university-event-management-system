@@ -6,12 +6,13 @@ db.exec(`
     DROP TABLE IF EXISTS categories;
     DROP TABLE IF EXISTS sessions;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS registrations;
 
     CREATE TABLE users (
         username TEXT PRIMARY KEY,
         hashedPassword TEXT NOT NULL,
         name TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
+        email TEXT NOT NULL,
         role TEXT NOT NULL CHECK(role IN('student', 'admin')),
         profile_image_url TEXT NOT NULL DEFAULT '/assets/profile-pictures/default/default.png'
     );

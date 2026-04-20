@@ -27,7 +27,7 @@ export function registrationController(ctx) {
 }
 
 
-export function addRegistrationController(ctx ,next) {
+export function addRegistrationController(ctx, next) {
     const { isValid, validated, headers, session } = ctx;
 
     if (!isValid) return next(ctx);

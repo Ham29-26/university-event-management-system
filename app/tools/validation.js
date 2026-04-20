@@ -86,7 +86,18 @@ export function usernameAvailable(name, value) {
     if (usernameExists(value)) {
         return `${name} "${value}" is already taken. Please choose another username.`
     }
-} 
+}
+
+// function to validate student id
+export function isStudentId(name, value) {
+    const pattern = /^A\d{7}$/;
+
+    value = value.toUpperCase();
+
+    if (!pattern.test(value)) {
+        return `${name} must start with 'A' followed by exactly 7 digits.`
+    }
+}
 
 export function validateField(name, value, validators) {
     for (const validator of validators) {
