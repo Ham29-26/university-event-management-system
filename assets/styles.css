@@ -21,7 +21,7 @@ main {
     flex-direction: column;
     gap: 1.5rem;
 
-    min-height: 0;
+    min-height: 60vh;
 }
 
 /* HEADER */
@@ -228,13 +228,6 @@ form.auth {
     border-top: none;
 
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    
-    /* align-content: start;
-
-    row-gap: 0.8rem;
-
-    max-height: 80vh;
-    overflow-y: auto; */
 }
 
 form.auth label {
@@ -283,25 +276,6 @@ form.auth button {
     text-align: center;
     margin-top: 1rem;
 }
-
-/* .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-
-    min-height: 2.8rem;
-
-    transition: all 0.15s ease;
-}
-
-.input-group span,
-.input-group small {
-    font-size: 0.75rem;
-    color: #c0392b;
-    line-height: 1.1;
-} */
-
-
 
 
 /* =========================
@@ -938,7 +912,7 @@ aside#flash.delete {
   display: flex;
   gap: 0.6rem;
   justify-content: center;
-  margin: 1.2rem 0;
+  margin: 1.2rem;
 }
 
 .registration-filter select,
@@ -951,9 +925,8 @@ aside#flash.delete {
 
 /* EMPTY STATE */
 .empty {
-  text-align: center;
-  font-style: italic;
-  opacity: 0.7;
+    font-size: 20px;
+    opacity: 0.7;
 }
 
 

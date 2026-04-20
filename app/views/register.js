@@ -63,7 +63,7 @@ export function registrationView({ user, allEvents, selectedEventId, errors = {}
             <label for="student-id">Student ID:</label>
             <div class="input-group">
               <input id="student-id" name="student-id"
-              placeholder="Student ID must be in the format A1234567"
+              placeholder="A1234567"
               ${studentId.value || ""}>
               ${studentId.message || ""}
             </div>
@@ -74,7 +74,7 @@ export function registrationView({ user, allEvents, selectedEventId, errors = {}
             <label for="phone">Phone Number:</label>
             <div class="input-group">
               <input id="phone" name="phone" 
-              placeholder="Phone number should be in the format +971561234567"
+              placeholder="+971561234567"
               ${phone.value || ""}>
               ${phone.message || ""}
             </div>

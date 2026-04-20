@@ -35,7 +35,7 @@ export function studentRegistrationsView(data) {
       </header>
 
       <main class="registration-styles">
-        ${registrationHtml || "<p>No registrations yet.</p>"}
+        ${registrationHtml || "<p class='empty'>No registrations yet.</p>"}
       </main>
     `;
 }
